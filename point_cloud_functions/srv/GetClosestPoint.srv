@@ -1,0 +1,13 @@
+string transform_to_link # Link to transform the pointcloud to
+bool filter_x
+bool filter_y
+bool filter_z
+float32 min_x
+float32 max_x
+float32 min_y 
+float32 max_y
+float32 min_z
+float32 max_z
+geometry_msgs/Point search_point
+---
+geometry_msgs/Point closest_point

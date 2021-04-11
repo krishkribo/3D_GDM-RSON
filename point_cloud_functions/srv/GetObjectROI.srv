@@ -1,0 +1,19 @@
+string transform_to_link # Link to transform the pointcloud to
+string sensor_topic_name # (Optional) overwrite topic of the pointcloud 
+bool filter_x
+bool filter_y
+bool filter_z
+float32 min_x
+float32 max_x
+float32 min_y 
+float32 max_y
+float32 min_z
+float32 max_z
+float32 surface_threshold
+int32 min_cluster_points
+int32 max_cluster_points
+float32 cluster_distance
+bool voxelize_cloud
+float32 leaf_size
+---
+ObjectROI[] object_rois

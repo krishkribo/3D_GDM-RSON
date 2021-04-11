@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="body_urdf" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- Include -->
+<xacro:include filename="$(find sim_world)/urdf/materials.xacro" />
+<xacro:include filename="$(find sim_world)/urdf/body.gazebo" />
+
+<xacro:property name="x1" value="0.934762"/>
+<xacro:property name="y1" value="-0.008436"/>
+<xacro:property name="z1" value="0.20025"/>
+<xacro:property name="width" value="0.1" />
+<xacro:property name="x2" value="-0.04"/>
+<xacro:property name="y2" value="-0.008436"/>
+<xacro:property name="z2" value="0.337514"/>
+
+<link name="world"/>
+<!--
+<joint name="fixed" type="fixed">
+  <parent link="world"/>
+  <child link="link_support"/>
+</joint>
+
+
+<link name="link_support">
+    
+    <inertial>
+        <mass value="0.2765"/>
+        <origin xyz="${x1} ${y1} ${z1}" rpy="0 0 0"/>
+        <inertia ixx="0.0025148009472833336" ixy="0" ixz="0" iyy="0.00024037001228333334" iyz="0" izz="0.002750128908333333"/>
+    </inertial>
+
+    <collision name="stand">
+      <origin xyz="${x1} ${y1} ${z1}" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="0.5" radius="0.01"/>
+        </geometry>
+    </collision>
+    <visual name="stand">
+        <origin xyz="${x1} ${y1} ${z1}" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="0.5" radius="0.01"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+</link>
+-->
+<joint name="joint1" type="fixed">
+    <parent link="world"/>
+    <child link="kinect_link"/>
+    <origin xyz="${x1+0.035} ${y1} ${z1-0.05}" rpy="-0 0.239685 -3.08638"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.7"/>
+</joint>
+
+<link name="kinect_link">
+
+ <collision>
+      <origin xyz="${x2} 0 ${z2}" rpy="0 0 0"/>
+      <geometry>
+	    <box size="0.073000 0.276000 0.072000"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="${x2} 0 ${z2}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://sim_world/meshes/kinect.dae"/>
+      </geometry>
+    </visual>
+    
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="${x2} 0 ${z2}" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+
+
+</link>
+
+<joint name="kinect_link_to_camera_joint" type="continuous">
+    <parent link="kinect_link"/>
+    <child link="link_camera"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+</joint>
+
+
+<link name="link_camera">
+</link>
+
+</robot>

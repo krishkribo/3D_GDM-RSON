@@ -1,0 +1,6 @@
+<launch>
+  <node name="voxel_node" pkg="point_cloud_functions" type="voxelize_cloud_node" output="screen">
+    <param name="input_topic_name" type="string" value="/camera/depth_registered/points" />
+		<param name="output_topic_name" type="string" value="/voxel_cloud/points" />
+  </node>
+</launch>

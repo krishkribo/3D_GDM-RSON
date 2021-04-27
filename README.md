@@ -2,11 +2,12 @@
 Thesis work, University of Groningen
 
 ## Sequential 3D-Dataset Generation branch 
-### Note: 
+### Installation Note: 
 For Ros data generation process need to install python3 tf2, follow in the instructions in the link below to install python3 tf2
 
 https://answers.ros.org/question/326226/importerror-dynamic-module-does-not-define-module-export-function-pyinit__tf2/
 
+### Model Note:
 The models provided in the spawn_models/models/sim_models/meshes folder is for sample only. The complete model data used in the data generation process are 
 available at https://drive.google.com/drive/folders/1O0PbzgXksPJ_bQMj5TcLGX566lPRlv8R?usp=sharing (s1-s5)
 

@@ -7,6 +7,19 @@ For Ros data generation process need to install python3 tf2, follow in the instr
 
 https://answers.ros.org/question/326226/importerror-dynamic-module-does-not-define-module-export-function-pyinit__tf2/
 
+### Instructions to run the code 
+#### Initialization:
+* start roscore ```roscore```
+* launch gazebo ```roslaunch sim_world simulation.launch```
+#### Start the bounding box server
+* ```roslaunch bounding_box_server bounding_box_server.launch```
+#### Run the object detection script in spawn_models/scripts folder
+* ```python3 utils/object_detection.py```
+#### Run the data generation script in spawn models/scripts folder
+* ```python3 generate_data.py```
+
+Use the two rviz config files ```test.rviz and test2.rviz``` to visualize environment, boudingbox, object detection and point clouds of the objects used in the data generation process.  
+
 ### Model Note:
 * The models provided in the spawn_models/models/sim_models/meshes folder is for sample only. The complete model data used in the data generation process are 
 available at https://drive.google.com/drive/folders/1O0PbzgXksPJ_bQMj5TcLGX566lPRlv8R?usp=sharing (s1-s5)

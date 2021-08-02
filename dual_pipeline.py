@@ -12,7 +12,6 @@ Objection Recognition + Grasping
 	-- collect samples of the object in the pybullet world
 	-- re-train the network to learn new category
 	-- predict the category label
-- draw the prediction on to the pybullet frame
 - perform grasping
 	-- isolated objects 
 	-- pack scenario
@@ -331,9 +330,6 @@ if __name__ == "__main__":
 	
 	if args.scenario == "isolated":
 		e_net, s_net = sim.run(args.scenario, runs=1, vis=False)
-	
-	elif args.scenario == "pack_selected":
-		# check the obj in isolated 
-		#e_net, s_net = sim.run('isolated', runs=1, vis=False)
-		# run pack selected
-		sim.run(args.scenario, runs=1, vis=False)
+		
+		
+		

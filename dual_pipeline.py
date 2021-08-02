@@ -266,7 +266,10 @@ class run_simulation(object):
 			
 		return self.e_net, self.s_net
 
-
+	def pack(self,runs, vis):
+		
+		raise NotImplementedError()
+	
 	def pack_selected_scenario(self,runs, vis):
 		
 		raise NotImplementedError()

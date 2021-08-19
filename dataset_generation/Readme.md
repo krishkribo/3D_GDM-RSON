@@ -1,5 +1,4 @@
 # Lifelong Object Grasp Synthesis using Dual Memory Recurrent Self-Organization Networks
-Thesis work, University of Groningen
 
 ## Sequential 3D-Dataset Generation branch 
 ### Installation Note: 
@@ -27,3 +26,6 @@ available at https://drive.google.com/drive/folders/1O0PbzgXksPJ_bQMj5TcLGX566lP
 * ```gen_model-sdf_config.py``` file in spawn_models folder generates the custom sdf and config for all models. 
 
 * The models with custom sdf and config files used in this experiment are available at https://drive.google.com/drive/folders/1216AoY10cXdcDJ8BrWmL3o3oIvzx1j7m?usp=sharing which contain 25 object categories with 5 objects in each category.
+
+Thesis work, University of Groningen
+

@@ -4,6 +4,6 @@
 
 Simulated robot environment code availabe in this repository is the modified version of [Learning to Grasp Objects in Highly Cluttered Environments using Deep Convolutional Neural Networks](https://github.com/JeroenOudeVrielink/ur5-robotic-grasping)
 
-<img src="simulated_env.png" width="500" height="300">
+<img src="simulated_env.png" width="720" height="480">
 
 Thesis work, Universiry of Groningen

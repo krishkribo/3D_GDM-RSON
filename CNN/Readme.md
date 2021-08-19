@@ -2,6 +2,6 @@
 
 ## Autoencoder 
 
-In this directory 
+In this directory the code from GR-ConvNet 
 
 Thesis work, Universiry of Groningen

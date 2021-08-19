@@ -25,7 +25,7 @@ available at https://drive.google.com/drive/folders/1O0PbzgXksPJ_bQMj5TcLGX566lP
 
 * ```gen_model-sdf_config.py``` file in spawn_models folder generates the custom sdf and config files for all models. 
 
-* The models with custom sdf and config files in this experiment are available at https://drive.google.com/drive/folders/1216AoY10cXdcDJ8BrWmL3o3oIvzx1j7m?usp=sharing which contain 25 object categories with 5 objects in each category.
+* The models with custom sdf and config files in this experiment are available at https://drive.google.com/drive/folders/1216AoY10cXdcDJ8BrWmL3o3oIvzx1j7m?usp=sharing which contain 25 object categories with 5 object instances in each category.
 
 _Thesis work, University of Groningen_
 

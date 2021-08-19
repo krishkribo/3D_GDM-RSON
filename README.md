@@ -20,13 +20,17 @@ Please follow the instruction given in the ```Readme.md``` in the ```dataset_gen
 A model can be trained using ```model_training.py``` script in ```CNN``` folder. Based on user input ('train' or 'val').
 
 ### GDM learning:
-The instructions to run the GDM model training and testing on the batch and incremental learning scenrios are given in ```experiments.txt``` file in ```GDM_learning``` folder.
+The instructions to run the GDM model training and testing on the batch and incremental learning scenrios are given in ```experiments.txt``` file in ```GDM_learning``` folder. 
 
 Examples: 
 
 ```
 python gdm_learning.py --mode both --test_mode both --learning_type batch --wandb_mode offline --features_path features_256_negative_n_model_7 --num_trials 5 --epochs 35 --dist_type manhattan --preprocess 0 --mini_batch 1 --bs_size 50 --context 1 --num_context 2 --output_folder batch_res_tc
 ```
+Run ```python gdm_learning.py``` to see full list of options. 
+
+
+
 
  
 

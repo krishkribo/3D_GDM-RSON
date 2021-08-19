@@ -19,9 +19,9 @@ Objection Recognition + Grasping
 
 """
 
-from G_GDM.preprocessing import processing
-from G_GDM.grasp_gdm import run_gdm
-from G_GDM.episodic_gwr import EpisodicGWR
+from GDM_learning.preprocessing import processing
+from GDM_learning.grasp_gdm import run_gdm
+from GDM_learning.episodic_gwr import EpisodicGWR
 
 from Grasping.grasp_generator import GraspGenerator
 from Grasping.environment.utilities import Camera

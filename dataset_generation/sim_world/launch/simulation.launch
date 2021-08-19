@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch> 
+
+
+ <include file="$(find gazebo_ros)/launch/empty_world.launch" >
+    <arg name="world_name" value="$(find sim_world)/world/model.world"/>
+    <arg name="gui" value="true" />
+    <arg name="use_sim_time" value="true"/>
+
+  </include>
+
+<param name="/use_sim_time" value="true"/>
+<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find sim_world)/urdf/body.xacro'" />
+<node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model body_urdf -param robot_description -z 0.05"/>
+
+<node name="tf1" pkg="tf" type="static_transform_publisher" args="0 0 1 0 0 2*3.14 kinect_link new_frame_id 30"/>
+
+<include file="$(find point_cloud_functions)/launch/point_cloud_functions.launch" />
+
+<node name="cloud_transformer" pkg="obj_recognition" type="obj_recognition_cloud_transformer" respawn="false"/>
+
+
+  <!-- feature extractor-->
+  <node name="feature_extractor" pkg="obj_recognition" type="obj_recognition_feature_extractor" respawn="false"/>
+
+</launch>
+
+
+

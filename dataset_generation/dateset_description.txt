@@ -1,0 +1,22 @@
+# Dataset description 
+# Note: Instances may vary based on the object visibility to the camera
+
+Format:
+Dataset
+    - scence_1(s1) 
+        -Objects (1-25) # object instances 
+            - 0-499 # samples
+    - scence_2(s2)
+        -Objects (1-25) # object instances 
+            - 0-499 # samples
+    ..
+        ..
+            ..     
+    - scence_25(s25)
+        -Objects (1-25) # object instances 
+            - 0-499 # samples
+
+
+Note:
+
+The attached sample model and the dataset contains the 3D objects and result of scene_1 only.

@@ -1,0 +1,53 @@
+Run the following experiments to get the respective results,
+
+----------------- Batch Learning with TC ---------------------
+
+python gdm_learning.py --mode both --test_mode both --learning_type batch --wandb_mode offline --features_path features_256_negative_n_model_7 --num_trials 5 --epochs 35 --dist_type manhattan --preprocess 0 --mini_batch 1 --bs_size 50 --context 1 --num_context 2 --output_folder batch_res_tc 
+
+----------------- Batch Learning without TC ---------------------
+
+python gdm_learning.py --mode both --test_mode both --learning_type batch --wandb_mode offline --features_path features_256_negative_n_model_7 --num_trials 5 --epochs 35 --dist_type manhattan --preprocess 0 --mini_batch 1 --bs_size 50 --context 0 --num_context 0 --output_folder batch_res_no_tc 
+
+
+----------------- Batch Learning No TC test---------------------
+
+python gdm_learning.py --mode both --test_mode both --learning_type batch --wandb_mode offline --features_path features_256_negative_n_model_7 --no_tc_test 1 --num_trials 5 --epochs 35 --dist_type manhattan --preprocess 0 --mini_batch 1 --bs_size 50 --context 1 --num_context 2 --output_folder batch_res_no_tc_test 
+
+----------------- Incremental Learning without memory replay---------------------
+
+python gdm_learning.py --mode both --test_mode both --learning_type incremental --wandb_mode offline --features_path features_256_negative_n_model_7 --num_trials 5 --epochs 3 --dist_type manhattan --preprocess 0 --mini_batch 1 --bs_size 50 --context 1 --num_context 2 --memory_replay 0 --output_folder incremental_res_without_m_r --e_threshold 0.5 --s_threshold 0.7 --beta 0.4 --e_b 0.5 --e_n 0.005
+
+----------------- Incremental Learning with memory replay---------------------
+
+python gdm_learning.py --mode both --test_mode both --learning_type incremental --wandb_mode offline --features_path features_256_negative_n_model_7 --num_trials 5 --epochs 3 --dist_type manhattan --preprocess 0 --mini_batch 1 --bs_size 50 --context 1 --num_context 2 --memory_replay 1 --output_folder incremental_res_with_m_r --e_threshold 0.5 --s_threshold 0.7 --beta 0.4 --e_b 0.5 --e_n 0.005
+
+----------------- Incremental Learning with memory replay (NI) ---------------------
+
+python gdm_learning.py --mode both --test_mode both --learning_type incremental --continual_learning_mode NI  --wandb_mode offline --features_path features_256_negative_n_model_7 --num_trials 5 --epochs 3 --dist_type manhattan --preprocess 0 --mini_batch 1 --bs_size 50 --context 1 --num_context 2 --memory_replay 1 --output_folder incremental_res_with_m_r_NI --e_threshold 0.5 --s_threshold 0.7 --beta 0.4 --e_b 0.5 --e_n 0.005
+
+----------------- Incremental Learning with memory replay (NC) ---------------------
+
+python gdm_learning.py --mode both --test_mode both --learning_type incremental --continual_learning_mode NC  --wandb_mode offline --features_path features_256_negative_n_model_7 --num_trials 5 --epochs 3 --dist_type manhattan --preprocess 0 --mini_batch 1 --bs_size 50 --context 1 --num_context 2 --memory_replay 1 --output_folder incremental_res_with_m_r_NC --e_threshold 0.5 --s_threshold 0.7 --beta 0.4 --e_b 0.5 --e_n 0.005
+
+----------------- Incremental Learning with memory replay (NIC) ---------------------
+
+python gdm_learning.py --mode both --test_mode both --learning_type incremental --continual_learning_mode NIC  --wandb_mode offline --features_path features_256_negative_n_model_7 --num_trials 5 --epochs 3 --dist_type manhattan --preprocess 0 --mini_batch 1 --bs_size 50 --context 1 --num_context 2 --memory_replay 1 --output_folder incremental_res_with_m_r_NIC --e_threshold 0.5 --s_threshold 0.7 --beta 0.4 --e_b 0.5 --e_n 0.005
+
+----------------- Incremental Learning without memory replay (NI) ---------------------
+
+python gdm_learning.py --mode both --test_mode both --learning_type incremental --continual_learning_mode NI  --wandb_mode offline --features_path features_256_negative_n_model_7 --num_trials 5 --epochs 3 --dist_type manhattan --preprocess 0 --mini_batch 1 --bs_size 50 --context 1 --num_context 2 --memory_replay 0 --output_folder incremental_res_without_m_r_NI --e_threshold 0.5 --s_threshold 0.7 --beta 0.4 --e_b 0.5 --e_n 0.005
+
+----------------- Incremental Learning without memory replay (NC) ---------------------
+
+python gdm_learning.py --mode both --test_mode both --learning_type incremental --continual_learning_mode NC  --wandb_mode offline --features_path features_256_negative_n_model_7 --num_trials 5 --epochs 3 --dist_type manhattan --preprocess 0 --mini_batch 1 --bs_size 50 --context 1 --num_context 2 --memory_replay 0 --output_folder incremental_res_without_m_r_NC --e_threshold 0.5 --s_threshold 0.7 --beta 0.4 --e_b 0.5 --e_n 0.005
+
+----------------- Incremental Learning without memory replay (NIC) ---------------------
+
+python gdm_learning.py --mode both --test_mode both --learning_type incremental --continual_learning_mode NIC  --wandb_mode offline --features_path features_256_negative_n_model_7 --num_trials 5 --epochs 3 --dist_type manhattan --preprocess 0 --mini_batch 1 --bs_size 50 --context 1 --num_context 2 --memory_replay 0 --output_folder incremental_res_without_m_r_NIC --e_threshold 0.5 --s_threshold 0.7 --beta 0.4 --e_b 0.5 --e_n 0.005
+
+
+
+
+
+
+

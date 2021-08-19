@@ -10,10 +10,14 @@ This repository contains the implementation of synthetic sequential point cloud 
 ## Requirements and Installation
 * python 3.8
 * Install the required libraries by running ``` pip install -r requirements.txt```
-The ```requirements.txt ``` file contains the esssential libraries for both dataset generation and continual learning. 
+The ```requirements.txt``` file contains the esssential libraries for both dataset generation and continual learning. 
 
-## 
+## Instructions
+### Dataset Generation
+Please follow the instruction given in the ```Readme.md``` in the ```dataset_generation``` folder to generate the dataset.
 
+### Autoencoder: Training and evaluation
+A model can be trained and evaluated using ```model_training.py``` script in ```CNN``` folder. To 
  
 
 

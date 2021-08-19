@@ -7,7 +7,4 @@ Simulated robot environment code availabe in this repository is the modified ver
 
 
 
-
-
-
 Thesis work, Universiry of Groningen

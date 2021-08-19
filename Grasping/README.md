@@ -6,4 +6,6 @@ Simulated robot environment code availabe in this repository is the modified ver
 
 <img src="simulated_env.png" width="720" height="480">
 
+Our modified version of simulate robot environment. 
+
 Thesis work, Universiry of Groningen

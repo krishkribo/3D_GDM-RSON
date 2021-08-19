@@ -8,8 +8,8 @@ This repository contains the implementation of synthetic sequential point cloud 
  * ``` Grasping and dual_pipeline.py ``` contains the end-end implementation of the proposed system architecture in _pybullet_ simulation environment for pick and place, and pack manipulation tasks.
 
 ## Requirements
-
-
+* python 3.8
+* Install the required libraries by running ``` pip install -r requirements.txt```
 
  
 

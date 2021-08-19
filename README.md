@@ -9,7 +9,7 @@ This repository contains the implementation of synthetic sequential point cloud 
 
 ## Requirements and Installation
 * python 3.8
-* Install the required libraries by running 
+* Install the required libraries by running, 
 ```
 pip install -r requirements.txt
 ```
@@ -25,17 +25,34 @@ A model can be trained using ```model_training.py``` script in ```CNN``` folder.
 ### GDM learning:
 The instructions to run the GDM model training and testing on the batch and incremental learning scenrios are given in ```experiments.txt``` file in ```GDM_learning``` folder. 
 
-Examples: 
+Example for batch learning: 
 
 ```
 python gdm_learning.py --mode both --test_mode both --learning_type batch --wandb_mode offline --features_path features_256_negative_n_model_7 --num_trials 5 --epochs 35 --dist_type manhattan --preprocess 0 --mini_batch 1 --bs_size 50 --context 1 --num_context 2 --output_folder batch_res_tc
 ```
-Run ```python gdm_learning.py``` to see full list of options. 
+Example for incremental learning:
+
+```
+python gdm_learning.py --mode both --test_mode both --learning_type incremental --wandb_mode offline --features_path features_256_negative_n_model_7 --num_trials 5 --epochs 3 --dist_type manhattan --preprocess 0 --mini_batch 1 --bs_size 50 --context 1 --num_context 2 --memory_replay 1 --output_folder incremental_res_with_m_r --e_threshold 0.5 --s_threshold 0.7 --beta 0.4 --e_b 0.5 --e_n 0.005
+```
+
+Run ```python gdm_learning.py --help``` to see full list of options. 
+
+Note: The above-mentioned experiments need to run inside their respective folders. 
+
+
+### Robot Demo:
+In the robot simulation demo, the real-time continous object recognition and grasp synthesis can be tested using ```dual-pipeline``` script. Using the script the model can be trained to learn new objects instance and category in contiual lifelong learning manner. Run ```dual-pipeline.py --help``` to see the list of options.
+
+Example (for pack scenario):
+```
+python dual_pipeline.py --e_network_path <path_to_episodic_memory_network> --s_network_path <path_to_semantic_memory_network> --model_path <path_to_trained_autoencoder_model> --scenario pack
+```
 
 
 
 
- 
+
 
 
 _Thesis work, University of Groningen_

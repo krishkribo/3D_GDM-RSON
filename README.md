@@ -17,4 +17,4 @@ The ```requirements.txt ``` file contains the esssential libraries for both data
  
 
 
-Thesis work, University of Groningen
+_Thesis work, University of Groningen_

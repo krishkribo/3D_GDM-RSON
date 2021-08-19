@@ -17,7 +17,7 @@ https://answers.ros.org/question/326226/importerror-dynamic-module-does-not-defi
 #### Run the data generation script in spawn models/scripts folder
 * ```python3 generate_data.py```
 
-Use the two rviz config files ```rviz_window1.rviz and rviz_window2.rviz``` to visualize environment, boudingbox, object detection and point clouds of the objects used in the data generation process.  
+Use the two rviz config files ```rviz_window1.rviz and rviz_window2.rviz``` to visualize environment, boudingbox, object detection and point clouds of the objects used in data generation process.  
 
 ### Model Note:
 * The models provided in the spawn_models/models/sim_models/meshes folder is for sample only. The complete model data used in the data generation process are 

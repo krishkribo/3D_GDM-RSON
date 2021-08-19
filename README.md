@@ -2,6 +2,8 @@
 
 This repository contains the implementation of synthetic sequential point cloud dataset generation and the implementation of hybrid learning architecture, comparises of generative autoencoder and the growing dual memory networks (GDM) for contiual learning of object recognition and grasping synthesis towards lifelong learning fashion.
 
+. ``` dataset_generation ``` folder contains the implementation of sequential point cloud dataset generation in ROS melodic. 
+
 
 
 Thesis work, University of Groningen

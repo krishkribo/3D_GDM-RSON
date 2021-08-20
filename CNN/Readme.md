@@ -2,6 +2,6 @@
 
 ## Autoencoder 
 
-The code in utils and inference directories are the adaptation of kumra's [robotic-grasping](https://github.com/skumra/robotic-grasping) open soruce code for generative residual convolutional neural network (GR-ConvNet), a pre-trained model in the autoencoder. 
+The code in utils and inference directories are the adaptation of kumra's [robotic-grasping](https://github.com/skumra/robotic-grasping) open soruce code for generative residual convolutional neural network (GR-ConvNet), a pre-trained model in the proposed autoencoder. 
 
 Thesis work, Universiry of Groningen

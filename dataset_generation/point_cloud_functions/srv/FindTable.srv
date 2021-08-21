@@ -1,0 +1,6 @@
+string transform_to_link
+float32 min_z
+float32 max_z
+---
+geometry_msgs/Point min_point
+geometry_msgs/Point max_point

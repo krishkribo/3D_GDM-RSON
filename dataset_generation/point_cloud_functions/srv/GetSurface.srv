@@ -1,0 +1,7 @@
+string transform_to
+float32 min_z
+float32 max_z
+float32 surface_threshold
+---
+geometry_msgs/Point min_point
+geometry_msgs/Point max_point

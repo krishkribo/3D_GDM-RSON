@@ -1,0 +1,7 @@
+<launch>
+
+  <node name="voxel_node_tiago" pkg="point_cloud_functions" type="voxelize_cloud_node">
+    <param name="input_topic_name" type="string" value="/xtion/depth_registered/points" />
+    <param name="output_topic_name" type="string" value="/throttle_filtering_points/filtered_points" />
+  </node>
+</launch>

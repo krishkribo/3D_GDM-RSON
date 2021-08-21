@@ -1,0 +1,7 @@
+string transform_to
+float32 surface_threshold
+float32 cluster_threshold
+float32 min_x 
+float32 max_x 
+---
+bounding_box_server/BoundingBox[] bounding_boxes

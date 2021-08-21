@@ -1,0 +1,11 @@
+<launch> 
+  <arg name="robot" default="kinect_custom" />
+<!--
+  <arg name="sensor_topic" value="/camera/depth_registered/points" if="$(eval arg('robot') == 'alice')" />
+  <arg name="sensor_topic" value="/xtion/depth_registered/points" if="$(eval arg('robot') == 'tiago')" />
+-->
+ <arg name="sensor_topic" value="/camera/depth/points" if="$(eval arg('robot') == 'kinect_custom')" />
+  <node name="point_cloud_functions" pkg="point_cloud_functions" type="point_cloud_functions_node" output="screen" >
+    <param name="sensor_topic" value="$(arg sensor_topic)" />
+  </node>
+</launch>

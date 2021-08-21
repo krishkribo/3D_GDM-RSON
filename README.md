@@ -50,8 +50,8 @@ python dual_pipeline.py --e_network_path <path to episodic memory network> --s_n
 ```
 <p align="center">
   <img src="images/demo_mustard_bottle.gif" alt="animated"/>
-   <img src="images/demo_power_drill.gif" alt="animated"/>
-  />
+  <img src="images/demo_power_drill.gif" alt="animated"/>
+ >
 
 
 _Thesis work, University of Groningen_

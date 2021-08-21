@@ -54,6 +54,6 @@ python dual_pipeline.py --e_network_path <path to episodic memory network> --s_n
   
   <img src="images/demo_power_drill.gif" alt="animated"/>
 
-Our simulation robot experiment result, (left) pick and place (pack) mustard bottle to basekt 2 and (right) pack power drill object to baskt 1.
+Our simulation robot experiment results, (left) pick and place (pack) mustard bottle to basekt 2 and (right) pack power drill object to baskt 1.
 
 _Thesis work, University of Groningen_

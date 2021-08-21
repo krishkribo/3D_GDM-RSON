@@ -251,8 +251,8 @@ def run(args, parameters, t):
 
 		process.test(e_net=e_net,s_net=s_net,test_type='category', dist_type=args.dist_type, data_pre_process=args.preprocess, mode=args.test_mode.lower())
 	
-	else:
-		raise Exception("Enter the correct mode of learning")
+	#else:
+	#	raise Exception("Enter the correct mode of learning")
 
 
 if __name__ == '__main__':

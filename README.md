@@ -49,7 +49,8 @@ Example (for pack scenario):
 python dual_pipeline.py --e_network_path <path to episodic memory network> --s_network_path <path to semantic memory network> --model_path <path to trained autoencoder model> --scenario pack
 ```
 <p align="center">
-![](images/demo_mustard_bottle.gif)      ![](images/demo_power_drill.gif)
+  <img src="images/demo_mustard_bottle.gif" alt="animated"/>
+   <img src="images/demo_power_drill.gif" alt="animated"/>
 /p>
 
 

@@ -177,7 +177,7 @@ class run_simulation(object):
 						feature = self.get_features(rgb_d)
 						cv2.imshow('image', img1)
 						e_net, s_net, instance_label, category_label = self.predict_obj(e_net, s_net, feature)
-						cv2.putText(with_contours, instance_label, (x-10,y-10), cv2.FONT_HERSHEY_SIMPLEX, 
+						cv2.putText(with_contours, category_label, (x-10,y-10), cv2.FONT_HERSHEY_SIMPLEX, 
 							0.5, (0,0,255), 2, cv2.LINE_AA)
 						if cv2.waitKey(1) & 0xFF == ord('q'):
 							break
@@ -447,7 +447,7 @@ class run_simulation(object):
 					
 					x, y, z, roll, opening_len, obj_height = grasp
 
-					if cat_objects_found[-1] == obj_to_pack or inst_objects_found[-1] == obj_to_pack:
+					if cat_objects_found[-1] == obj_to_pack:
 						print("\nPlacing in right (to robot) basket\n")
 						# place in basket right to the robot
 						success_grasp, success_target = self.env.grasp_2(

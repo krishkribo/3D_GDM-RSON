@@ -65,7 +65,7 @@ class run_simulation(object):
 		self.env = Environment(self.camera, vis=True, debug=debug)
 		self.generator = GraspGenerator(self.model_path, self.camera, 5)
 		self.obj_list = processing().obj_labels
-		self.threshold = 100
+		self.threshold = 150 # contour area threshold
 
 	def get_rgbd_from_camera(self):
 		# get image from camera 
@@ -78,6 +78,7 @@ class run_simulation(object):
 		return processing().get_feature(data=rgbd_img, norm=True, model_name=model_name)
 
 	def predict_obj(self, e_net, s_net, data):
+		# object class prediction
 		data = data.reshape(1,-1)
 		e_weight, e_label = e_net.test(np.array(data), None, ret_vecs=True, data_pre_process=False,
 			dist_type = 'manhattan')
@@ -87,7 +88,7 @@ class run_simulation(object):
 		print(f"\nPredicted instance label : {self.obj_list[int(e_label[0])]}\n")
 		print(f"\nPredicted category label : {self.obj_list[int(s_label[0])]}\n")
 		
-		return e_net, s_net, e_label, self.obj_list[int(s_label[0])]
+		return e_net, s_net, self.obj_list[int(e_label[0])], self.obj_list[int(s_label[0])]
 
 
 	def collect_samples(self, path, mod_orn, mod_stiffness):
@@ -96,7 +97,7 @@ class run_simulation(object):
 		for _ in range(30):
 			self.env.load_isolated_obj(path, mod_orn, mod_stiffness)
 			rgb, depth = self.get_rgbd_from_camera()
-			rgb, depth = self.get_bounding_box(rgb, depth)
+			rgb, depth, _, _, _, _, _, _, _, _ = self.get_bounding_box_and_predict(rgb, depth)
 			rgb = rgb[0]
 			depth = depth[0]
 			_, _, rgb_d = self.generator.predict_grasp(rgb, depth, n_grasps=3)
@@ -109,10 +110,43 @@ class run_simulation(object):
 		
 		return new_object_features
 
-	def get_bounding_box(self, rgb, depth):
+	def fill_image(self, img, img_type='rgb'):
+		reszie_shape = 224
+		height, width = img.shape[:2]
+		if img_type == 'rgb':
+			blank_image = np.zeros((reszie_shape,reszie_shape,3), np.uint8)
+			blank_image[:,:] = (255,255,255)
+		elif img_type == 'depth':
+			blank_image = np.zeros((reszie_shape,reszie_shape), np.uint8)
+
+		tmp_img = blank_image.copy()
+
+		x_offset = int((int(reszie_shape/2)+height)/2)
+		y_offset = int((int(reszie_shape/2)+width)/2)
+
+		tmp_img[y_offset:y_offset+height, x_offset:x_offset+width] = img.copy()
+
+		return tmp_img
+
+
+	def get_bounding_box_and_predict(self, rgb, depth, predict=False, **kwargs):
+
+		e_net = kwargs.get('e_net', None)
+		s_net = kwargs.get('s_net', None)
+
+		cat_objects_found = []
+		inst_objects_found = []
+		x_arr = []
+		y_arr = []
+		w_arr = []
+		h_arr = []
+		cropped_rgb = []
+		cropped_depth = []
+
 		img = cv2.cvtColor(rgb, cv2.COLOR_BGR2RGB)
 		img1 = cv2.cvtColor(rgb, cv2.COLOR_BGR2RGB)
 		gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
 		ret, binary = cv2.threshold(gray, 100, 255, 
 		  cv2.THRESH_OTSU)
 		inverted_binary = ~binary
@@ -121,24 +155,55 @@ class run_simulation(object):
 		  cv2.CHAIN_APPROX_SIMPLE)
 
 		with_contours = cv2.drawContours(img, contours, -1,(255,0,255),3)
+		try:
+			for c in contours:
+				x, y, w, h = cv2.boundingRect(c)
+				# Make sure contour area is large enough
+				if (cv2.contourArea(c)) > self.threshold:
 
-		obj_cropped = []
-		depth_cropped = []
-		for c in contours:
-			x, y, w, h = cv2.boundingRect(c)
-			# Make sure contour area is large enough
-			if (cv2.contourArea(c)) > self.threshold:
+					cv2.rectangle(with_contours,(x,y), (x+w,y+h), (255,0,0), 2)
+					#t_rgb = cv2.resize(img1[y:y+h, x:x+w], (224,224))
+					t_rgb = self.fill_image(img1[y:y+h, x:x+w], img_type='rgb')
+					#t_depth = cv2.resize(depth[y:y+h, x:x+w], (224,224))
+					t_depth = self.fill_image(depth[y:y+h, x:x+w], img_type='depth')
+					
+					cropped_rgb.append(t_rgb)
+					cropped_depth.append(t_depth)
 
-				cv2.rectangle(with_contours,(x,y), (x+w,y+h), (255,0,0), 5)
-				t_rgb = cv2.resize(img1[y:y+h, x:x+w], (224,224))
-				t_depth = cv2.resize(depth[y:y+h, x:x+w], (224,224))
+					if predict:
+						_, _, rgb_d = self.generator.predict_grasp(t_rgb, t_depth, n_grasps=1)
 
-				obj_cropped.append(t_rgb)
-				depth_cropped.append(t_depth)
+						# get features for gdm learning
+						feature = self.get_features(rgb_d)
+						cv2.imshow('image', img1)
+						e_net, s_net, instance_label, category_label = self.predict_obj(e_net, s_net, feature)
+						cv2.putText(with_contours, instance_label, (x-10,y-10), cv2.FONT_HERSHEY_SIMPLEX, 
+							0.5, (0,0,255), 2, cv2.LINE_AA)
+						if cv2.waitKey(1) & 0xFF == ord('q'):
+							break
 
-		return obj_cropped, depth_cropped
+						cat_objects_found.append(category_label)
+						inst_objects_found.append(instance_label)
+
+					cv2.imshow('cropped image', t_rgb)
+
+					x_arr.append(x)
+					y_arr.append(y)
+					w_arr.append(w)
+					h_arr.append(h)
+
+		except Exception:
+			print(f"\nNo contours found\n")
+
+		cv2.imshow('Objects in the scene', with_contours)
+		if cv2.waitKey(1) & 0xFF == ord('q'):
+			cv2.destroyAllWindows()
+
+		return cropped_rgb, cropped_depth, cat_objects_found, inst_objects_found, x_arr, y_arr, w_arr, h_arr, e_net, s_net
 
 	def re_train(self, e_net, s_net, object_name, features):
+		# incrementally training new object categories
+
 		start_time = int(asctime().split(' ')[-2].split(':')[-1])+60*int(asctime().split(' ')[-2].split(':')[-2])
 		
 		# expand global categort list 
@@ -150,17 +215,15 @@ class run_simulation(object):
 		s_label = []
 
 		obj_idx = self.obj_list.index(object_name)
-		for i in range(len(features)):
-			# replace in same instance of the same category object is retrained 
+		for i in range(len(features)): 
 			e_label.append(len(self.obj_list)-1)
-			# get the index of the new added object
 			s_label.append(len(self.obj_list)-1)
 
 		features = np.array(features)
 		e_label = np.array(e_label)
 		s_label = np.array(s_label)
 
-		# init the gdm learning
+		# initialize the gdm learning
 		process = run_gdm( 
 						learning_type=1,
 						wb_mode="offline", 
@@ -229,29 +292,38 @@ class run_simulation(object):
 				'''if obj_name != "PowerDrill":
 					continue'''
 
-				if obj_name != "Strawberry" and obj_name !='TennisBall':
-					self.threshold = 50
+				if obj_name != "Strawberry":
+					self.threshold = 25
+				if obj_name !='TennisBall':
+					self.threshold = 50	
 				else: 
-					self.threshold = 100
+					self.threshold = 150
 
 				print(f"Object in process : {obj_name}")
 				path, mod_orn, mod_stiffness = objects.get_obj_info(obj_name)
 				self.env.load_isolated_obj(path, mod_orn, mod_stiffness)
 				self.env.move_away_arm()
 
-				rgb, depth = self.get_rgbd_from_camera()
+				# get image from camera and predict
+				try:
+					c_rgb, c_depth = self.get_rgbd_from_camera()
+					rgb, depth, category_labels, instance_labels, _, _, _, _, e_net, s_net = self.get_bounding_box_and_predict(c_rgb, c_depth, 
+						predict=True, e_net=self.e_net, s_net=self.s_net)
+					rgb = rgb[0]
+					depth = depth[0]
+					category_label = category_labels[0]
+					instance_label = instance_labels[0]
+					img = rgb
+				except Exception:
+					print(f"\nwarning contour area threshold mismatch\n")
+					continue
 
-				rgb, depth = self.get_bounding_box(rgb, depth)
-				rgb = rgb[0]
-				depth = depth[0]
-				grasps, _, rgb_d = self.generator.predict_grasp(rgb, depth, n_grasps=3)
-
-				# get features for gdm learning
-				feature = self.get_features(rgb_d)		
-				img = rgb
-				# predict - GDM
-				e_net, s_net, instance_label, category_label = self.predict_obj(self.e_net, self.s_net, feature)
-
+				cv2.putText(img, category_label, (0,40), cv2.FONT_HERSHEY_SIMPLEX, 
+					0.75, (0,0,255), 1, cv2.LINE_AA)
+				cv2.imshow('Object Recognition', img)
+				cv2.imwrite('results/objects_org_{}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))+'.jpg', img)
+				cv2.waitKey(1)
+				
 				read_user = input("Train (y/n) : ")
 				if read_user == 'y' or read_user == 'yes':
 					category_object = input("Enter the object name :")
@@ -260,20 +332,39 @@ class run_simulation(object):
 					n_features = self.collect_samples(path, mod_orn, mod_stiffness)
 
 					# re-train 
-					self.re_train(e_net, s_net, category_object, n_features)
-
-					# predict 
-					e_net, s_net, instance_label, category_label = self.predict_obj(self.e_net, self.s_net, feature)
-					
+					e_net, s_net = self.re_train(e_net, s_net, category_object, n_features)
 					self.e_net = e_net
 					self.s_net = s_net
 
+					time.sleep(2)
+					# load the same object and predict again
+					self.env.reset_all_obj()
+					self.env.remove_all_obj()
 					self.env.load_isolated_obj(path, mod_orn, mod_stiffness)
+					self.env.move_away_arm()
+					try:
+						# get image from camera and predict
+						r_c_rgb, r_c_depth = self.get_rgbd_from_camera()
+						rgb, depth, category_labels, instance_labels, _, _, _, _, e_net, s_net = self.get_bounding_box_and_predict(r_c_rgb, r_c_depth, 
+							predict=True, e_net=self.e_net, s_net=self.s_net)
+						rgb = rgb[0]
+						depth = depth[0]
+						category_label = category_labels[0]
+						instance_label = instance_labels[0]
+						img = rgb
+						c_rgb = r_c_rgb
+						c_depth = r_c_depth
+					except Exception:
+						print(f"\ncontour area threshold mismatch\n")
+						continue
 
 				cv2.putText(img, category_label, (0,40), cv2.FONT_HERSHEY_SIMPLEX, 
-					1, (0,0,255), 1, cv2.LINE_AA)
-				
-				grasps, _, rgb_d = self.generator.predict_grasp(rgb, depth, n_grasps=3)
+					0.75, (0,0,255), 1, cv2.LINE_AA)
+				cv2.imshow('Object Recognition', img)
+				if cv2.waitKey(1) & 0xFF == ord('q'):
+					break
+
+				grasps, _, rgb_d = self.generator.predict_grasp(c_rgb, c_depth, n_grasps=3)
 
 				for i, grasp in enumerate(grasps):
 					x, y, z, roll, opening_len, obj_height = grasp
@@ -294,17 +385,15 @@ class run_simulation(object):
 					
 					self.env.reset_all_obj()
 				
-				cv2.imshow('Object Recognition', img)
+				#cv2.imshow('Object Recognition_updated', img)
 				cv2.imwrite('results/objects_pred_{}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))+'.jpg', img)
 				cv2.imwrite('results/objects_rgb_{}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))+'.jpg', rgb)
 				cv2.imwrite('results/objects_depth_{}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))+'.jpg', depth)
 				#cv2.imwrite('results/objects_rgbd_{}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))+'.jpg', rgb_image)
 				num_itr+=1
-				time.sleep(2)
 				self.env.remove_all_obj()
-
-				if cv2.waitKey(1) & 0xFF == ord('q'):
-					break
+				self.env.move_away_arm()
+				
 			
 			print(f"success/attemps : {num_success}/{num_itr}  = {num_success/num_itr}")
 		
@@ -320,6 +409,7 @@ class run_simulation(object):
 		num_itr = 0
 		num_success = 0
 		for i in range(runs):
+
 			print(f'Trial {i}')
 			straight_fails = 0
 			objects.shuffle_objects()
@@ -327,65 +417,18 @@ class run_simulation(object):
 			self.env.create_packed(info)
 			obj_to_pack = input("Object to pack : ")
 			straight_fails = 0
-			while len(self.env.obj_ids) != 0 and straight_fails < 3:
+			len_objs = len(self.env.obj_ids)
+			while  len_objs != 0 and straight_fails < 3:
 				self.env.move_away_arm()
-				self.env.reset_all_obj()
 				c_rgb, c_depth = self.get_rgbd_from_camera()
 
 				# find the object boundaries using contour detection
-				img = cv2.cvtColor(c_rgb, cv2.COLOR_BGR2RGB)
-				img1 = cv2.cvtColor(c_rgb, cv2.COLOR_BGR2RGB)
+				try:
+					_, _, cat_objects_found, inst_objects_found, x_arr, y_arr, w_arr, h_arr, _, _ = self.get_bounding_box_and_predict(c_rgb, c_depth, predict=True, e_net=e_net, s_net=s_net)
 
-				gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-				ret, binary = cv2.threshold(gray, 100, 255, 
-				  cv2.THRESH_OTSU)
-				inverted_binary = ~binary
-				contours, hierarchy = cv2.findContours(inverted_binary,
-				  cv2.RETR_TREE,
-				  cv2.CHAIN_APPROX_SIMPLE)
-
-				with_contours = cv2.drawContours(img, contours, -1,(255,0,255),3)
-
-				cat_objects_found = []
-				inst_objects_found = []
-				x_arr = []
-				y_arr = []
-				w_arr = []
-				h_arr = []
-				# Object Classification
-				for c in contours:
-					x, y, w, h = cv2.boundingRect(c)
-					# Make sure contour area is large enough
-					if (cv2.contourArea(c)) > 100:
-
-						cv2.rectangle(with_contours,(x,y), (x+w,y+h), (255,0,0), 5)
-						rgb = cv2.resize(img1[y:y+h, x:x+w], (224,224))
-						depth = cv2.resize( c_depth[y:y+h, x:x+w], (224,224))
-						
-						_, _, rgb_d = self.generator.predict_grasp(rgb, depth, n_grasps=1)
-
-						# get features for gdm learning
-						feature = self.get_features(rgb_d)
-					
-						cv2.imshow('image', rgb)
-
-						# predict - GDM
-						e_net, s_net, instance_label, category_label = self.predict_obj(e_net, s_net, feature)
-
-						if cv2.waitKey(1) & 0xFF == ord('q'):
-							break
-
-						cat_objects_found.append(category_label)
-						inst_objects_found.append(instance_label)
-						x_arr.append(x)
-						y_arr.append(y)
-						w_arr.append(w)
-						h_arr.append(h)
-
-					cv2.imshow('cropped image', img[y:y+h, x:x+w])
-						 
-				cv2.imshow('All contours with bounding box', with_contours)
-				cv2.destroyAllWindows()
+				except Exception:
+					print(f"\nwarning contour area threshold mismatch\n")
+					continue
 
 				# Grasping 
 				grasps, _, _ = self.generator.predict(c_rgb, c_depth, n_grasps=1)
@@ -394,19 +437,25 @@ class run_simulation(object):
 				for g, grasp in zip(grasps,grasps_obj):
 					tmp_y = np.array(y_arr) + np.array(h_arr) - g.center[1]
 					tmp_x = np.array(x_arr) + np.array(w_arr) - g.center[0]
-					min_idx = np.argmin(tmp_x+tmp_y)
-					print(f"object to grasp : {inst_objects_found[min_idx]}, {cat_objects_found[min_idx]}")
+					
+					try:
+						min_idx = np.argmin(tmp_x+tmp_y)
+						print(f"object to grasp : {inst_objects_found[min_idx]}, {cat_objects_found[min_idx]}")
+					except Exception:
+						print(f"\nNo contours found\n")
+						len_objs-=1
+					
 					x, y, z, roll, opening_len, obj_height = grasp
 
 					if cat_objects_found[-1] == obj_to_pack or inst_objects_found[-1] == obj_to_pack:
 						print("\nPlacing in right (to robot) basket\n")
 						# place in basket right to the robot
-						succes_grasp, succes_target = self.env.grasp_2(
+						success_grasp, success_target = self.env.grasp_2(
 							(x, y, z), roll, opening_len, obj_height)
 					else:
 						print("\nPlacing in left (to robot) basket\n")
 						# place in basket left to the robot
-						success_grasp, succes_target = self.env.grasp(
+						success_grasp, success_target = self.env.grasp(
 							(x, y, z), roll, opening_len, obj_height)
 					if vis:
 						debug_id = p.addUserDebugLine(
@@ -416,7 +465,8 @@ class run_simulation(object):
 					if success_grasp:
 						num_success+=1
 
-					if succes_target:
+					if success_target:
+						len_objs-=1
 						straight_fails = 0
 						break
 					else:
@@ -435,15 +485,16 @@ class run_simulation(object):
 
 		if scenario == 'isolated':
 			e_net, s_net = self.isolated_scenario(runs, vis)
-			processing().export_network('e_net_updated',e_net)
-			processing().export_network('s_net_updated',s_net)
-			processing().write_file("object_list.npy",self.obj_list,"gdm_out/")
+			#processing().export_network('e_net_updated',e_net)
+			#processing().export_network('s_net_updated',s_net)
+			#processing().write_file("object_list.npy",self.obj_list,"gdm_out/")
 			return e_net, s_net
 
 		elif scenario == 'pack':
 			e_net = processing().import_network('e_net_updated',EpisodicGWR)
 			s_net = processing().import_network('s_net_updated',EpisodicGWR)
-			self.obj_list = processing().load_file("gdm_out/object_list.npy")
+			obj_list = processing().load_file("gdm_out/object_list.npy")
+			self.obj_list = obj_list
 			# perform manipulation
 			self.pack_scenario(e_net, s_net, runs=1, vis=vis)
 			

@@ -495,7 +495,7 @@ class Environment:
 		center_obj, _, _ = self.load_obj(
 			path, [init_x, init_y, init_z], yaw, mod_orn, mod_stiffness)
 
-		margin = 0.2
+		margin = 0.25
 		yaw = random.uniform(0, np.pi)
 		path, mod_orn, mod_stiffness = obj_info[1]
 		left_obj_id, _, _ = self.load_obj(
@@ -629,7 +629,7 @@ class Environment:
 			self.step_simulation()
 		if self.check_target_reached(grasped_obj_id):
 			succes_target = True
-			self.remove_obj(grasped_obj_id)
+			#self.remove_obj(grasped_obj_id)
 
 		return succes_grasp, succes_target
 
@@ -691,7 +691,7 @@ class Environment:
 			self.step_simulation()
 		if self.check_target_reached_2(grasped_obj_id):
 			succes_target = True
-			self.remove_obj(grasped_obj_id)
+			#self.remove_obj(grasped_obj_id)
 
 		return succes_grasp, succes_target
 

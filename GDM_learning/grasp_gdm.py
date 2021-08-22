@@ -380,6 +380,7 @@ class run_gdm(processing):
 	def run(self, f_data, f_e_label, f_s_label, **kwargs):
 
 		save = kwargs.get('save', True)
+		single_inp_class = kwargs.get('enable_replay', False) # variable to trigger memory replay when only one objects is incrementally trained
 		print(f"Training initialized ----->\n")
 
 		# training params
@@ -576,7 +577,10 @@ class run_gdm(processing):
 						dist_type=dist_type, data_pre_process=data_pre_process, debug=self.debug)
 					
 					# replay
-					if self.replay == True and epoch > 0:
+					if self.replay:
+						replay_weights, replay_labels = self.replay_samples(g_episodic, replay_size)
+						
+					if (self.replay == True and epoch > 0) or (self.replay == True and single_inp_class ==True):
 						g_em_params_cpy = g_em_params
 						g_em_params_cpy['context'] = 0
 						g_sm_params_cpy = g_sm_params
@@ -592,10 +596,6 @@ class run_gdm(processing):
 							g_semantic.train_egwr(
 									replay_weights[r], replay_labels[r], g_sm_params_cpy, w, self.s_r_w_logs, t_test=False,
 									dist_type=dist_type, data_pre_process=data_pre_process, debug=self.debug)
-							
-							
-					if self.replay:
-						replay_weights, replay_labels = self.replay_samples(g_episodic, replay_size)
 
 					# test until the number of categories encountered so far.
 					tmp_test_data = data[:epoch+1]

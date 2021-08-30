@@ -242,7 +242,7 @@ def run(args, parameters, t):
 		print(f"Episodic Network loaded from path -> {save_folder+'/'+e_file}")
 		print(f"Semantic Network loaded from path -> {save_folder+'/'+s_file}")
 		
-		if not args.no_tc_test:
+		if args.no_tc_test:
 			print(f"Testing without TC ----->")
 			e_net.context = False
 			s_net.context = False

@@ -1,0 +1,902 @@
+Enter the mode (train/val): train
+Training on : cuda ....
+Dataset loaded ....
+Dataset length : 885
+Training size : 796
+Validation size : 89
+<torch.utils.data.sampler.SubsetRandomSampler object at 0x7fb165bf9f40>
+Initilization done ....
+Training with ResNet -->
+Complete model
+Sequential(
+  (0): ResNet(
+    (grconv_encoder): GenerativeResnet_encoder(
+      (conv1): Conv2d(4, 32, kernel_size=(9, 9), stride=(1, 1), padding=(4, 4))
+      (bn1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(32, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv2d(64, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+      (bn3): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (res1): ResidualBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (res2): ResidualBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (res3): ResidualBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (res4): ResidualBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (res5): ResidualBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (encoder_1): encoder(
+      (conv): Conv2d(128, 64, kernel_size=(4, 4), stride=(2, 2), padding=(4, 4))
+      (bn): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (encoder_2): encoder(
+      (conv): Conv2d(64, 32, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+      (bn): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (down_sampling): down_sampling(
+      (avg_pooling): AvgPool2d(kernel_size=(3, 8), stride=4, padding=0)
+      (flatten): Flatten(start_dim=1, end_dim=-1)
+    )
+    (res1): ResidualBlock(
+      (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (bn1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (bn2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (res2): ResidualBlock(
+      (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (bn1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (bn2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (res3): ResidualBlock(
+      (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (bn1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (bn2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (decoder_1): decoder(
+      (conv): ConvTranspose2d(32, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+      (bn): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (decoder_2): decoder(
+      (conv): ConvTranspose2d(64, 128, kernel_size=(4, 4), stride=(2, 2), padding=(4, 4))
+      (bn): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (grconv_decoder): GenerativeResnet_decoder(
+      (conv4): ConvTranspose2d(128, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+      (bn4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv5): ConvTranspose2d(64, 32, kernel_size=(4, 4), stride=(2, 2), padding=(2, 2), output_padding=(1, 1))
+      (bn5): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv6): ConvTranspose2d(32, 32, kernel_size=(9, 9), stride=(1, 1), padding=(4, 4))
+    )
+    (output): Output(
+      (pos): Conv2d(32, 1, kernel_size=(2, 2), stride=(1, 1))
+      (cos): Conv2d(32, 1, kernel_size=(2, 2), stride=(1, 1))
+      (sin): Conv2d(32, 1, kernel_size=(2, 2), stride=(1, 1))
+      (width): Conv2d(32, 1, kernel_size=(2, 2), stride=(1, 1))
+      (conv): Conv2d(32, 4, kernel_size=(2, 2), stride=(1, 1))
+      (dropout_pos): Dropout(p=0.1, inplace=False)
+      (dropout_cos): Dropout(p=0.1, inplace=False)
+      (dropout_sin): Dropout(p=0.1, inplace=False)
+      (dropout_wid): Dropout(p=0.1, inplace=False)
+    )
+  )
+)
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 224, 224]          10,400
+       BatchNorm2d-2         [-1, 32, 224, 224]              64
+            Conv2d-3         [-1, 64, 112, 112]          32,832
+       BatchNorm2d-4         [-1, 64, 112, 112]             128
+            Conv2d-5          [-1, 128, 56, 56]         131,200
+       BatchNorm2d-6          [-1, 128, 56, 56]             256
+            Conv2d-7          [-1, 128, 56, 56]         147,584
+       BatchNorm2d-8          [-1, 128, 56, 56]             256
+            Conv2d-9          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-10          [-1, 128, 56, 56]             256
+    ResidualBlock-11          [-1, 128, 56, 56]               0
+           Conv2d-12          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-13          [-1, 128, 56, 56]             256
+           Conv2d-14          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-15          [-1, 128, 56, 56]             256
+    ResidualBlock-16          [-1, 128, 56, 56]               0
+           Conv2d-17          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-18          [-1, 128, 56, 56]             256
+           Conv2d-19          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-20          [-1, 128, 56, 56]             256
+    ResidualBlock-21          [-1, 128, 56, 56]               0
+           Conv2d-22          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-23          [-1, 128, 56, 56]             256
+           Conv2d-24          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-25          [-1, 128, 56, 56]             256
+    ResidualBlock-26          [-1, 128, 56, 56]               0
+           Conv2d-27          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-28          [-1, 128, 56, 56]             256
+           Conv2d-29          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-30          [-1, 128, 56, 56]             256
+    ResidualBlock-31          [-1, 128, 56, 56]               0
+GenerativeResnet_encoder-32          [-1, 128, 56, 56]               0
+           Conv2d-33           [-1, 64, 31, 31]         131,136
+      BatchNorm2d-34           [-1, 64, 31, 31]             128
+          encoder-35           [-1, 64, 31, 31]               0
+           Conv2d-36           [-1, 32, 15, 15]          32,800
+      BatchNorm2d-37           [-1, 32, 15, 15]              64
+          encoder-38           [-1, 32, 15, 15]               0
+           Conv2d-39           [-1, 32, 15, 15]          32,800
+      BatchNorm2d-40           [-1, 32, 15, 15]              64
+          encoder-41           [-1, 32, 15, 15]               0
+        AvgPool2d-42             [-1, 32, 4, 2]               0
+          Flatten-43                  [-1, 256]               0
+    down_sampling-44                  [-1, 256]               0
+           Conv2d-45           [-1, 32, 15, 15]           9,248
+      BatchNorm2d-46           [-1, 32, 15, 15]              64
+           Conv2d-47           [-1, 32, 15, 15]           9,248
+      BatchNorm2d-48           [-1, 32, 15, 15]              64
+    ResidualBlock-49           [-1, 32, 15, 15]               0
+           Conv2d-50           [-1, 32, 15, 15]           9,248
+      BatchNorm2d-51           [-1, 32, 15, 15]              64
+           Conv2d-52           [-1, 32, 15, 15]           9,248
+      BatchNorm2d-53           [-1, 32, 15, 15]              64
+    ResidualBlock-54           [-1, 32, 15, 15]               0
+           Conv2d-55           [-1, 32, 15, 15]           9,248
+      BatchNorm2d-56           [-1, 32, 15, 15]              64
+           Conv2d-57           [-1, 32, 15, 15]           9,248
+      BatchNorm2d-58           [-1, 32, 15, 15]              64
+    ResidualBlock-59           [-1, 32, 15, 15]               0
+  ConvTranspose2d-60           [-1, 64, 31, 31]          32,832
+      BatchNorm2d-61           [-1, 64, 31, 31]             128
+          decoder-62           [-1, 64, 31, 31]               0
+  ConvTranspose2d-63          [-1, 128, 56, 56]         131,200
+      BatchNorm2d-64          [-1, 128, 56, 56]             256
+          decoder-65          [-1, 128, 56, 56]               0
+  ConvTranspose2d-66         [-1, 64, 113, 113]         131,136
+      BatchNorm2d-67         [-1, 64, 113, 113]             128
+  ConvTranspose2d-68         [-1, 32, 225, 225]          32,800
+      BatchNorm2d-69         [-1, 32, 225, 225]              64
+  ConvTranspose2d-70         [-1, 32, 225, 225]          82,976
+GenerativeResnet_decoder-71         [-1, 32, 225, 225]               0
+          Dropout-72         [-1, 32, 225, 225]               0
+           Conv2d-73          [-1, 1, 224, 224]             129
+          Dropout-74         [-1, 32, 225, 225]               0
+           Conv2d-75          [-1, 1, 224, 224]             129
+          Dropout-76         [-1, 32, 225, 225]               0
+           Conv2d-77          [-1, 1, 224, 224]             129
+          Dropout-78         [-1, 32, 225, 225]               0
+           Conv2d-79          [-1, 1, 224, 224]             129
+           Conv2d-80          [-1, 4, 224, 224]             516
+           Output-81  [[-1, 1, 224, 224], [-1, 1, 224, 224], [-1, 1, 224, 224], [-1, 1, 224, 224], [-1, 4, 224, 224]]               0
+/home/krish/anaconda3/envs/project_env_1/lib/python3.8/site-packages/torchsummary/torchsummary.py:93: RuntimeWarning: overflow encountered in long_scalars
+  total_output += np.prod(summary[layer]["output_shape"])
+           ResNet-82  [[-1, 1, 224, 224], [-1, 1, 224, 224], [-1, 1, 224, 224], [-1, 1, 224, 224], [-1, 4, 224, 224]]               0
+================================================================
+Total params: 2,318,696
+Trainable params: 2,318,696
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.77
+Forward/backward pass size (MB): 51745765982458.07
+Params size (MB): 8.85
+Estimated Total Size (MB): 51745765982467.68
+----------------------------------------------------------------
+Network initialized ....
+Training with RMSprop optimizer ....
+Epochs:   0%|                                                                                 | 0/50 [00:00<?, ?it/s]Epoch 0/49
+----------
+Epoch: 0, Batch: 100, Loss: 0.0009
+Epoch: 0, Batch: 200, Loss: 0.0010
+Epoch: 0, Batch: 300, Loss: 0.0012
+Epoch: 0, Batch: 400, Loss: 0.0015
+Epoch: 0, Batch: 500, Loss: 0.0006
+Epoch: 0, Batch: 600, Loss: 0.0007
+Epoch: 0, Batch: 700, Loss: 0.0006
+Epoch: 0, Batch: 800, Loss: 0.0008
+Epoch: 0, Batch: 900, Loss: 0.0008
+Validating ....
+Accuracy: 55/89 = 0.61798
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.6180_epoch-0
+Best accuracy : 0.6179775280898876
+Epochs:   2%|█▍                                                                    | 1/50 [04:05<3:20:21, 245.33s/it]Epoch 1/49
+----------
+Epoch: 1, Batch: 100, Loss: 0.0007
+Epoch: 1, Batch: 200, Loss: 0.0004
+Epoch: 1, Batch: 300, Loss: 0.0010
+Epoch: 1, Batch: 400, Loss: 0.0005
+Epoch: 1, Batch: 500, Loss: 0.0011
+Epoch: 1, Batch: 600, Loss: 0.0006
+Epoch: 1, Batch: 700, Loss: 0.0004
+Epoch: 1, Batch: 800, Loss: 0.0005
+Epoch: 1, Batch: 900, Loss: 0.0010
+Validating ....
+Accuracy: 62/89 = 0.69663
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.6966_epoch-1
+Best accuracy : 0.6966292134831461
+Epochs:   4%|██▊                                                                   | 2/50 [08:12<3:17:16, 246.60s/it]Epoch 2/49
+----------
+Epoch: 2, Batch: 100, Loss: 0.0004
+Epoch: 2, Batch: 200, Loss: 0.0005
+Epoch: 2, Batch: 300, Loss: 0.0004
+Epoch: 2, Batch: 400, Loss: 0.0003
+Epoch: 2, Batch: 500, Loss: 0.0003
+Epoch: 2, Batch: 600, Loss: 0.0004
+Epoch: 2, Batch: 700, Loss: 0.0005
+Epoch: 2, Batch: 800, Loss: 0.0005
+Epoch: 2, Batch: 900, Loss: 0.0009
+Validating ....
+Accuracy: 58/89 = 0.65169
+Epochs:   6%|████▏                                                                 | 3/50 [12:22<3:14:26, 248.23s/it]Epoch 3/49
+----------
+Epoch: 3, Batch: 100, Loss: 0.0004
+Epoch: 3, Batch: 200, Loss: 0.0008
+Epoch: 3, Batch: 300, Loss: 0.0004
+Epoch: 3, Batch: 400, Loss: 0.0006
+Epoch: 3, Batch: 500, Loss: 0.0006
+Epoch: 3, Batch: 600, Loss: 0.0003
+Epoch: 3, Batch: 700, Loss: 0.0005
+Epoch: 3, Batch: 800, Loss: 0.0004
+Epoch: 3, Batch: 900, Loss: 0.0005
+Validating ....
+Accuracy: 73/89 = 0.82022
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.8202_epoch-3
+Best accuracy : 0.8202247191011236
+Epochs:   8%|█████▌                                                                | 4/50 [16:31<3:10:20, 248.26s/it]Epoch 4/49
+----------
+Epoch: 4, Batch: 100, Loss: 0.0004
+Epoch: 4, Batch: 200, Loss: 0.0004
+Epoch: 4, Batch: 300, Loss: 0.0004
+Epoch: 4, Batch: 400, Loss: 0.0004
+Epoch: 4, Batch: 500, Loss: 0.0007
+Epoch: 4, Batch: 600, Loss: 0.0003
+Epoch: 4, Batch: 700, Loss: 0.0004
+Epoch: 4, Batch: 800, Loss: 0.0002
+Epoch: 4, Batch: 900, Loss: 0.0007
+Validating ....
+Accuracy: 77/89 = 0.86517
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.8652_epoch-4
+Best accuracy : 0.8651685393258427
+Epochs:  10%|███████                                                               | 5/50 [20:40<3:06:31, 248.69s/it]Epoch 5/49
+----------
+Epoch: 5, Batch: 100, Loss: 0.0003
+Epoch: 5, Batch: 200, Loss: 0.0002
+Epoch: 5, Batch: 300, Loss: 0.0003
+Epoch: 5, Batch: 400, Loss: 0.0006
+Epoch: 5, Batch: 500, Loss: 0.0006
+Epoch: 5, Batch: 600, Loss: 0.0006
+Epoch: 5, Batch: 700, Loss: 0.0003
+Epoch: 5, Batch: 800, Loss: 0.0004
+Epoch: 5, Batch: 900, Loss: 0.0005
+Validating ....
+Accuracy: 76/89 = 0.85393
+Epochs:  12%|████████▍                                                             | 6/50 [24:48<3:02:08, 248.38s/it]Epoch 6/49
+----------
+Epoch: 6, Batch: 100, Loss: 0.0003
+Epoch: 6, Batch: 200, Loss: 0.0006
+Epoch: 6, Batch: 300, Loss: 0.0004
+Epoch: 6, Batch: 400, Loss: 0.0004
+Epoch: 6, Batch: 500, Loss: 0.0006
+Epoch: 6, Batch: 600, Loss: 0.0003
+Epoch: 6, Batch: 700, Loss: 0.0007
+Epoch: 6, Batch: 800, Loss: 0.0007
+Epoch: 6, Batch: 900, Loss: 0.0004
+Validating ....
+Accuracy: 77/89 = 0.86517
+Epochs:  14%|█████████▊                                                            | 7/50 [28:57<2:58:07, 248.54s/it]Epoch 7/49
+----------
+Epoch: 7, Batch: 100, Loss: 0.0002
+Epoch: 7, Batch: 200, Loss: 0.0002
+Epoch: 7, Batch: 300, Loss: 0.0006
+Epoch: 7, Batch: 400, Loss: 0.0004
+Epoch: 7, Batch: 500, Loss: 0.0002
+Epoch: 7, Batch: 600, Loss: 0.0005
+Epoch: 7, Batch: 700, Loss: 0.0007
+Epoch: 7, Batch: 800, Loss: 0.0006
+Epoch: 7, Batch: 900, Loss: 0.0002
+Validating ....
+Accuracy: 79/89 = 0.88764
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.8876_epoch-7
+Best accuracy : 0.8876404494382022
+Epochs:  16%|███████████▏                                                          | 8/50 [33:11<2:55:10, 250.26s/it]Epoch 8/49
+----------
+Epoch: 8, Batch: 100, Loss: 0.0004
+Epoch: 8, Batch: 200, Loss: 0.0004
+Epoch: 8, Batch: 300, Loss: 0.0003
+Epoch: 8, Batch: 400, Loss: 0.0003
+Epoch: 8, Batch: 500, Loss: 0.0006
+Epoch: 8, Batch: 600, Loss: 0.0003
+Epoch: 8, Batch: 700, Loss: 0.0006
+Epoch: 8, Batch: 800, Loss: 0.0005
+Epoch: 8, Batch: 900, Loss: 0.0004
+Validating ....
+Accuracy: 79/89 = 0.88764
+Epochs:  18%|████████████▌                                                         | 9/50 [37:20<2:50:48, 249.97s/it]Epoch 9/49
+----------
+Epoch: 9, Batch: 100, Loss: 0.0004
+Epoch: 9, Batch: 200, Loss: 0.0007
+Epoch: 9, Batch: 300, Loss: 0.0003
+Epoch: 9, Batch: 400, Loss: 0.0003
+Epoch: 9, Batch: 500, Loss: 0.0005
+Epoch: 9, Batch: 600, Loss: 0.0006
+Epoch: 9, Batch: 700, Loss: 0.0004
+Epoch: 9, Batch: 800, Loss: 0.0003
+Epoch: 9, Batch: 900, Loss: 0.0004
+Validating ....
+Accuracy: 80/89 = 0.89888
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.8989_epoch-9
+Best accuracy : 0.898876404494382
+Epochs:  20%|█████████████▊                                                       | 10/50 [41:30<2:46:35, 249.89s/it]Epoch 10/49
+----------
+Epoch: 10, Batch: 100, Loss: 0.0003
+Epoch: 10, Batch: 200, Loss: 0.0007
+Epoch: 10, Batch: 300, Loss: 0.0007
+Epoch: 10, Batch: 400, Loss: 0.0003
+Epoch: 10, Batch: 500, Loss: 0.0003
+Epoch: 10, Batch: 600, Loss: 0.0005
+Epoch: 10, Batch: 700, Loss: 0.0006
+Epoch: 10, Batch: 800, Loss: 0.0001
+Epoch: 10, Batch: 900, Loss: 0.0005
+Validating ....
+Accuracy: 74/89 = 0.83146
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.8315_epoch-10
+Best accuracy : 0.8314606741573034
+Epochs:  22%|███████████████▏                                                     | 11/50 [45:40<2:42:27, 249.93s/it]Epoch 11/49
+----------
+Epoch: 11, Batch: 100, Loss: 0.0002
+Epoch: 11, Batch: 200, Loss: 0.0005
+Epoch: 11, Batch: 300, Loss: 0.0003
+Epoch: 11, Batch: 400, Loss: 0.0006
+Epoch: 11, Batch: 500, Loss: 0.0004
+Epoch: 11, Batch: 600, Loss: 0.0002
+Epoch: 11, Batch: 700, Loss: 0.0005
+Epoch: 11, Batch: 800, Loss: 0.0004
+Epoch: 11, Batch: 900, Loss: 0.0003
+Validating ....
+Accuracy: 78/89 = 0.87640
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.8764_epoch-11
+Best accuracy : 0.8764044943820225
+Epochs:  24%|████████████████▌                                                    | 12/50 [49:53<2:38:58, 251.02s/it]Epoch 12/49
+----------
+Epoch: 12, Batch: 100, Loss: 0.0004
+Epoch: 12, Batch: 200, Loss: 0.0005
+Epoch: 12, Batch: 300, Loss: 0.0003
+Epoch: 12, Batch: 400, Loss: 0.0006
+Epoch: 12, Batch: 500, Loss: 0.0003
+Epoch: 12, Batch: 600, Loss: 0.0004
+Epoch: 12, Batch: 700, Loss: 0.0004
+Epoch: 12, Batch: 800, Loss: 0.0005
+Epoch: 12, Batch: 900, Loss: 0.0005
+Validating ....
+Accuracy: 80/89 = 0.89888
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.8989_epoch-12
+Best accuracy : 0.898876404494382
+Epochs:  26%|█████████████████▉                                                   | 13/50 [54:04<2:34:37, 250.75s/it]Epoch 13/49
+----------
+Epoch: 13, Batch: 100, Loss: 0.0004
+Epoch: 13, Batch: 200, Loss: 0.0003
+Epoch: 13, Batch: 300, Loss: 0.0004
+Epoch: 13, Batch: 400, Loss: 0.0004
+Epoch: 13, Batch: 500, Loss: 0.0002
+Epoch: 13, Batch: 600, Loss: 0.0003
+Epoch: 13, Batch: 700, Loss: 0.0004
+Epoch: 13, Batch: 800, Loss: 0.0002
+Epoch: 13, Batch: 900, Loss: 0.0007
+Validating ....
+Accuracy: 81/89 = 0.91011
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.9101_epoch-13
+Best accuracy : 0.9101123595505618
+Epochs:  28%|███████████████████▎                                                 | 14/50 [58:15<2:30:30, 250.85s/it]Epoch 14/49
+----------
+Epoch: 14, Batch: 100, Loss: 0.0002
+Epoch: 14, Batch: 200, Loss: 0.0004
+Epoch: 14, Batch: 300, Loss: 0.0005
+Epoch: 14, Batch: 400, Loss: 0.0003
+Epoch: 14, Batch: 500, Loss: 0.0004
+Epoch: 14, Batch: 600, Loss: 0.0004
+Epoch: 14, Batch: 700, Loss: 0.0004
+Epoch: 14, Batch: 800, Loss: 0.0006
+Epoch: 14, Batch: 900, Loss: 0.0003
+Validating ....
+Accuracy: 83/89 = 0.93258
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.9326_epoch-14
+Best accuracy : 0.9325842696629213
+Epochs:  30%|████████████████████                                               | 15/50 [1:02:26<2:26:28, 251.10s/it]Epoch 15/49
+----------
+Epoch: 15, Batch: 100, Loss: 0.0003
+Epoch: 15, Batch: 200, Loss: 0.0003
+Epoch: 15, Batch: 300, Loss: 0.0010
+Epoch: 15, Batch: 400, Loss: 0.0002
+Epoch: 15, Batch: 500, Loss: 0.0006
+Epoch: 15, Batch: 600, Loss: 0.0001
+Epoch: 15, Batch: 700, Loss: 0.0005
+Epoch: 15, Batch: 800, Loss: 0.0003
+Epoch: 15, Batch: 900, Loss: 0.0005
+Validating ....
+Accuracy: 78/89 = 0.87640
+Epochs:  32%|█████████████████████▍                                             | 16/50 [1:06:37<2:22:10, 250.90s/it]Epoch 16/49
+----------
+Epoch: 16, Batch: 100, Loss: 0.0004
+Epoch: 16, Batch: 200, Loss: 0.0005
+Epoch: 16, Batch: 300, Loss: 0.0002
+Epoch: 16, Batch: 400, Loss: 0.0004
+Epoch: 16, Batch: 500, Loss: 0.0005
+Epoch: 16, Batch: 600, Loss: 0.0005
+Epoch: 16, Batch: 700, Loss: 0.0003
+Epoch: 16, Batch: 800, Loss: 0.0004
+Epoch: 16, Batch: 900, Loss: 0.0005
+Validating ....
+Accuracy: 84/89 = 0.94382
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.9438_epoch-16
+Best accuracy : 0.9438202247191011
+Epochs:  34%|██████████████████████▊                                            | 17/50 [1:10:46<2:17:47, 250.53s/it]Epoch 17/49
+----------
+Epoch: 17, Batch: 100, Loss: 0.0003
+Epoch: 17, Batch: 200, Loss: 0.0004
+Epoch: 17, Batch: 300, Loss: 0.0004
+Epoch: 17, Batch: 400, Loss: 0.0006
+Epoch: 17, Batch: 500, Loss: 0.0001
+Epoch: 17, Batch: 600, Loss: 0.0007
+Epoch: 17, Batch: 700, Loss: 0.0003
+Epoch: 17, Batch: 800, Loss: 0.0002
+Epoch: 17, Batch: 900, Loss: 0.0004
+Validating ....
+Accuracy: 80/89 = 0.89888
+Epochs:  36%|████████████████████████                                           | 18/50 [1:14:58<2:13:45, 250.80s/it]Epoch 18/49
+----------
+Epoch: 18, Batch: 100, Loss: 0.0006
+Epoch: 18, Batch: 200, Loss: 0.0003
+Epoch: 18, Batch: 300, Loss: 0.0003
+Epoch: 18, Batch: 400, Loss: 0.0004
+Epoch: 18, Batch: 500, Loss: 0.0005
+Epoch: 18, Batch: 600, Loss: 0.0002
+Epoch: 18, Batch: 700, Loss: 0.0004
+Epoch: 18, Batch: 800, Loss: 0.0002
+Epoch: 18, Batch: 900, Loss: 0.0006
+Validating ....
+Accuracy: 75/89 = 0.84270
+Epochs:  38%|█████████████████████████▍                                         | 19/50 [1:19:09<2:09:38, 250.92s/it]Epoch 19/49
+----------
+Epoch: 19, Batch: 100, Loss: 0.0004
+Epoch: 19, Batch: 200, Loss: 0.0007
+Epoch: 19, Batch: 300, Loss: 0.0003
+Epoch: 19, Batch: 400, Loss: 0.0004
+Epoch: 19, Batch: 500, Loss: 0.0003
+Epoch: 19, Batch: 600, Loss: 0.0002
+Epoch: 19, Batch: 700, Loss: 0.0003
+Epoch: 19, Batch: 800, Loss: 0.0002
+Epoch: 19, Batch: 900, Loss: 0.0003
+Validating ....
+Accuracy: 80/89 = 0.89888
+Epochs:  40%|██████████████████████████▊                                        | 20/50 [1:23:20<2:05:28, 250.96s/it]Epoch 20/49
+----------
+Epoch: 20, Batch: 100, Loss: 0.0004
+Epoch: 20, Batch: 200, Loss: 0.0003
+Epoch: 20, Batch: 300, Loss: 0.0003
+Epoch: 20, Batch: 400, Loss: 0.0004
+Epoch: 20, Batch: 500, Loss: 0.0002
+Epoch: 20, Batch: 600, Loss: 0.0002
+Epoch: 20, Batch: 700, Loss: 0.0007
+Epoch: 20, Batch: 800, Loss: 0.0006
+Epoch: 20, Batch: 900, Loss: 0.0002
+Validating ....
+Accuracy: 79/89 = 0.88764
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.8876_epoch-20
+Best accuracy : 0.8876404494382022
+Epochs:  42%|████████████████████████████▏                                      | 21/50 [1:27:32<2:01:25, 251.23s/it]Epoch 21/49
+----------
+Epoch: 21, Batch: 100, Loss: 0.0004
+Epoch: 21, Batch: 200, Loss: 0.0007
+Epoch: 21, Batch: 300, Loss: 0.0004
+Epoch: 21, Batch: 400, Loss: 0.0006
+Epoch: 21, Batch: 500, Loss: 0.0002
+Epoch: 21, Batch: 600, Loss: 0.0002
+Epoch: 21, Batch: 700, Loss: 0.0003
+Epoch: 21, Batch: 800, Loss: 0.0002
+Epoch: 21, Batch: 900, Loss: 0.0004
+Validating ....
+Accuracy: 79/89 = 0.88764
+Epochs:  44%|█████████████████████████████▍                                     | 22/50 [1:31:44<1:57:20, 251.43s/it]Epoch 22/49
+----------
+Epoch: 22, Batch: 100, Loss: 0.0003
+Epoch: 22, Batch: 200, Loss: 0.0003
+Epoch: 22, Batch: 300, Loss: 0.0007
+Epoch: 22, Batch: 400, Loss: 0.0003
+Epoch: 22, Batch: 500, Loss: 0.0005
+Epoch: 22, Batch: 600, Loss: 0.0004
+Epoch: 22, Batch: 700, Loss: 0.0002
+Epoch: 22, Batch: 800, Loss: 0.0003
+Epoch: 22, Batch: 900, Loss: 0.0003
+Validating ....
+Accuracy: 83/89 = 0.93258
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.9326_epoch-22
+Best accuracy : 0.9325842696629213
+Epochs:  46%|██████████████████████████████▊                                    | 23/50 [1:35:56<1:53:12, 251.56s/it]Epoch 23/49
+----------
+Epoch: 23, Batch: 100, Loss: 0.0004
+Epoch: 23, Batch: 200, Loss: 0.0001
+Epoch: 23, Batch: 300, Loss: 0.0001
+Epoch: 23, Batch: 400, Loss: 0.0008
+Epoch: 23, Batch: 500, Loss: 0.0002
+Epoch: 23, Batch: 600, Loss: 0.0005
+Epoch: 23, Batch: 700, Loss: 0.0002
+Epoch: 23, Batch: 800, Loss: 0.0006
+Epoch: 23, Batch: 900, Loss: 0.0005
+Validating ....
+Accuracy: 81/89 = 0.91011
+Epochs:  48%|████████████████████████████████▏                                  | 24/50 [1:40:07<1:49:00, 251.54s/it]Epoch 24/49
+----------
+Epoch: 24, Batch: 100, Loss: 0.0007
+Epoch: 24, Batch: 200, Loss: 0.0006
+Epoch: 24, Batch: 300, Loss: 0.0002
+Epoch: 24, Batch: 400, Loss: 0.0002
+Epoch: 24, Batch: 500, Loss: 0.0003
+Epoch: 24, Batch: 600, Loss: 0.0006
+Epoch: 24, Batch: 700, Loss: 0.0003
+Epoch: 24, Batch: 800, Loss: 0.0004
+Epoch: 24, Batch: 900, Loss: 0.0005
+Validating ....
+Accuracy: 83/89 = 0.93258
+Epochs:  50%|█████████████████████████████████▌                                 | 25/50 [1:44:19<1:44:51, 251.65s/it]Epoch 25/49
+----------
+Epoch: 25, Batch: 100, Loss: 0.0003
+Epoch: 25, Batch: 200, Loss: 0.0005
+Epoch: 25, Batch: 300, Loss: 0.0002
+Epoch: 25, Batch: 400, Loss: 0.0001
+Epoch: 25, Batch: 500, Loss: 0.0002
+Epoch: 25, Batch: 600, Loss: 0.0004
+Epoch: 25, Batch: 700, Loss: 0.0003
+Epoch: 25, Batch: 800, Loss: 0.0003
+Epoch: 25, Batch: 900, Loss: 0.0005
+Validating ....
+Accuracy: 78/89 = 0.87640
+Epochs:  52%|██████████████████████████████████▊                                | 26/50 [1:48:30<1:40:37, 251.54s/it]Epoch 26/49
+----------
+Epoch: 26, Batch: 100, Loss: 0.0003
+Epoch: 26, Batch: 200, Loss: 0.0005
+Epoch: 26, Batch: 300, Loss: 0.0007
+Epoch: 26, Batch: 400, Loss: 0.0002
+Epoch: 26, Batch: 500, Loss: 0.0003
+Epoch: 26, Batch: 600, Loss: 0.0003
+Epoch: 26, Batch: 700, Loss: 0.0006
+Epoch: 26, Batch: 800, Loss: 0.0005
+Epoch: 26, Batch: 900, Loss: 0.0004
+Validating ....
+Accuracy: 78/89 = 0.87640
+Epochs:  54%|████████████████████████████████████▏                              | 27/50 [1:52:44<1:36:36, 252.01s/it]Epoch 27/49
+----------
+Epoch: 27, Batch: 100, Loss: 0.0002
+Epoch: 27, Batch: 200, Loss: 0.0002
+Epoch: 27, Batch: 300, Loss: 0.0003
+Epoch: 27, Batch: 400, Loss: 0.0004
+Epoch: 27, Batch: 500, Loss: 0.0003
+Epoch: 27, Batch: 600, Loss: 0.0005
+Epoch: 27, Batch: 700, Loss: 0.0002
+Epoch: 27, Batch: 800, Loss: 0.0004
+Epoch: 27, Batch: 900, Loss: 0.0007
+Validating ....
+Accuracy: 78/89 = 0.87640
+Epochs:  56%|█████████████████████████████████████▌                             | 28/50 [1:56:56<1:32:27, 252.15s/it]Epoch 28/49
+----------
+Epoch: 28, Batch: 100, Loss: 0.0003
+Epoch: 28, Batch: 200, Loss: 0.0003
+Epoch: 28, Batch: 300, Loss: 0.0005
+Epoch: 28, Batch: 400, Loss: 0.0003
+Epoch: 28, Batch: 500, Loss: 0.0002
+Epoch: 28, Batch: 600, Loss: 0.0003
+Epoch: 28, Batch: 700, Loss: 0.0004
+Epoch: 28, Batch: 800, Loss: 0.0004
+Epoch: 28, Batch: 900, Loss: 0.0004
+Validating ....
+Accuracy: 77/89 = 0.86517
+Epochs:  58%|██████████████████████████████████████▊                            | 29/50 [2:01:08<1:28:11, 251.98s/it]Epoch 29/49
+----------
+Epoch: 29, Batch: 100, Loss: 0.0003
+Epoch: 29, Batch: 200, Loss: 0.0004
+Epoch: 29, Batch: 300, Loss: 0.0002
+Epoch: 29, Batch: 400, Loss: 0.0004
+Epoch: 29, Batch: 500, Loss: 0.0002
+Epoch: 29, Batch: 600, Loss: 0.0004
+Epoch: 29, Batch: 700, Loss: 0.0004
+Epoch: 29, Batch: 800, Loss: 0.0006
+Epoch: 29, Batch: 900, Loss: 0.0003
+Validating ....
+Accuracy: 81/89 = 0.91011
+Epochs:  60%|████████████████████████████████████████▏                          | 30/50 [2:05:21<1:24:06, 252.32s/it]Epoch 30/49
+----------
+Epoch: 30, Batch: 100, Loss: 0.0002
+Epoch: 30, Batch: 200, Loss: 0.0001
+Epoch: 30, Batch: 300, Loss: 0.0003
+Epoch: 30, Batch: 400, Loss: 0.0002
+Epoch: 30, Batch: 500, Loss: 0.0001
+Epoch: 30, Batch: 600, Loss: 0.0001
+Epoch: 30, Batch: 700, Loss: 0.0004
+Epoch: 30, Batch: 800, Loss: 0.0002
+Epoch: 30, Batch: 900, Loss: 0.0003
+Validating ....
+Accuracy: 78/89 = 0.87640
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.8764_epoch-30
+Best accuracy : 0.8764044943820225
+Epochs:  62%|█████████████████████████████████████████▌                         | 31/50 [2:09:33<1:19:53, 252.30s/it]Epoch 31/49
+----------
+Epoch: 31, Batch: 100, Loss: 0.0001
+Epoch: 31, Batch: 200, Loss: 0.0004
+Epoch: 31, Batch: 300, Loss: 0.0002
+Epoch: 31, Batch: 400, Loss: 0.0004
+Epoch: 31, Batch: 500, Loss: 0.0004
+Epoch: 31, Batch: 600, Loss: 0.0003
+Epoch: 31, Batch: 700, Loss: 0.0006
+Epoch: 31, Batch: 800, Loss: 0.0004
+Epoch: 31, Batch: 900, Loss: 0.0006
+Validating ....
+Accuracy: 80/89 = 0.89888
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.8989_epoch-31
+Best accuracy : 0.898876404494382
+Epochs:  64%|██████████████████████████████████████████▉                        | 32/50 [2:13:47<1:15:51, 252.84s/it]Epoch 32/49
+----------
+Epoch: 32, Batch: 100, Loss: 0.0003
+Epoch: 32, Batch: 200, Loss: 0.0005
+Epoch: 32, Batch: 300, Loss: 0.0004
+Epoch: 32, Batch: 400, Loss: 0.0002
+Epoch: 32, Batch: 500, Loss: 0.0002
+Epoch: 32, Batch: 600, Loss: 0.0002
+Epoch: 32, Batch: 700, Loss: 0.0004
+Epoch: 32, Batch: 800, Loss: 0.0006
+Epoch: 32, Batch: 900, Loss: 0.0004
+Validating ....
+Accuracy: 82/89 = 0.92135
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.9213_epoch-32
+Best accuracy : 0.9213483146067416
+Epochs:  66%|████████████████████████████████████████████▏                      | 33/50 [2:17:59<1:11:31, 252.45s/it]Epoch 33/49
+----------
+Epoch: 33, Batch: 100, Loss: 0.0003
+Epoch: 33, Batch: 200, Loss: 0.0002
+Epoch: 33, Batch: 300, Loss: 0.0005
+Epoch: 33, Batch: 400, Loss: 0.0004
+Epoch: 33, Batch: 500, Loss: 0.0002
+Epoch: 33, Batch: 600, Loss: 0.0004
+Epoch: 33, Batch: 700, Loss: 0.0006
+Epoch: 33, Batch: 800, Loss: 0.0004
+Epoch: 33, Batch: 900, Loss: 0.0004
+Validating ....
+Accuracy: 79/89 = 0.88764
+Epochs:  68%|█████████████████████████████████████████████▌                     | 34/50 [2:22:11<1:07:21, 252.58s/it]Epoch 34/49
+----------
+Epoch: 34, Batch: 100, Loss: 0.0005
+Epoch: 34, Batch: 200, Loss: 0.0002
+Epoch: 34, Batch: 300, Loss: 0.0005
+Epoch: 34, Batch: 400, Loss: 0.0004
+Epoch: 34, Batch: 500, Loss: 0.0005
+Epoch: 34, Batch: 600, Loss: 0.0004
+Epoch: 34, Batch: 700, Loss: 0.0004
+Epoch: 34, Batch: 800, Loss: 0.0004
+Epoch: 34, Batch: 900, Loss: 0.0002
+Validating ....
+Accuracy: 87/89 = 0.97753
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.9775_epoch-34
+Best accuracy : 0.9775280898876404
+Epochs:  70%|██████████████████████████████████████████████▉                    | 35/50 [2:26:24<1:03:08, 252.55s/it]Epoch 35/49
+----------
+Epoch: 35, Batch: 100, Loss: 0.0003
+Epoch: 35, Batch: 200, Loss: 0.0005
+Epoch: 35, Batch: 300, Loss: 0.0003
+Epoch: 35, Batch: 400, Loss: 0.0003
+Epoch: 35, Batch: 500, Loss: 0.0004
+Epoch: 35, Batch: 600, Loss: 0.0002
+Epoch: 35, Batch: 700, Loss: 0.0003
+Epoch: 35, Batch: 800, Loss: 0.0008
+Epoch: 35, Batch: 900, Loss: 0.0002
+Validating ....
+Accuracy: 83/89 = 0.93258
+Epochs:  72%|█████████████████████████████████████████████████▋                   | 36/50 [2:30:37<58:56, 252.63s/it]Epoch 36/49
+----------
+Epoch: 36, Batch: 100, Loss: 0.0006
+Epoch: 36, Batch: 200, Loss: 0.0005
+Epoch: 36, Batch: 300, Loss: 0.0005
+Epoch: 36, Batch: 400, Loss: 0.0002
+Epoch: 36, Batch: 500, Loss: 0.0001
+Epoch: 36, Batch: 600, Loss: 0.0003
+Epoch: 36, Batch: 700, Loss: 0.0008
+Epoch: 36, Batch: 800, Loss: 0.0003
+Epoch: 36, Batch: 900, Loss: 0.0002
+Validating ....
+Accuracy: 82/89 = 0.92135
+Epochs:  74%|███████████████████████████████████████████████████                  | 37/50 [2:34:48<54:40, 252.33s/it]Epoch 37/49
+----------
+Epoch: 37, Batch: 100, Loss: 0.0006
+Epoch: 37, Batch: 200, Loss: 0.0003
+Epoch: 37, Batch: 300, Loss: 0.0003
+Epoch: 37, Batch: 400, Loss: 0.0002
+Epoch: 37, Batch: 500, Loss: 0.0004
+Epoch: 37, Batch: 600, Loss: 0.0003
+Epoch: 37, Batch: 700, Loss: 0.0003
+Epoch: 37, Batch: 800, Loss: 0.0002
+Epoch: 37, Batch: 900, Loss: 0.0001
+Validating ....
+Accuracy: 84/89 = 0.94382
+Epochs:  76%|████████████████████████████████████████████████████▍                | 38/50 [2:39:00<50:26, 252.17s/it]Epoch 38/49
+----------
+Epoch: 38, Batch: 100, Loss: 0.0003
+Epoch: 38, Batch: 200, Loss: 0.0003
+Epoch: 38, Batch: 300, Loss: 0.0002
+Epoch: 38, Batch: 400, Loss: 0.0004
+Epoch: 38, Batch: 500, Loss: 0.0003
+Epoch: 38, Batch: 600, Loss: 0.0003
+Epoch: 38, Batch: 700, Loss: 0.0002
+Epoch: 38, Batch: 800, Loss: 0.0003
+Epoch: 38, Batch: 900, Loss: 0.0003
+Validating ....
+Accuracy: 81/89 = 0.91011
+Epochs:  78%|█████████████████████████████████████████████████████▊               | 39/50 [2:43:12<46:12, 252.07s/it]Epoch 39/49
+----------
+Epoch: 39, Batch: 100, Loss: 0.0004
+Epoch: 39, Batch: 200, Loss: 0.0002
+Epoch: 39, Batch: 300, Loss: 0.0007
+Epoch: 39, Batch: 400, Loss: 0.0005
+Epoch: 39, Batch: 500, Loss: 0.0003
+Epoch: 39, Batch: 600, Loss: 0.0003
+Epoch: 39, Batch: 700, Loss: 0.0002
+Epoch: 39, Batch: 800, Loss: 0.0003
+Epoch: 39, Batch: 900, Loss: 0.0004
+Validating ....
+Accuracy: 73/89 = 0.82022
+Epochs:  80%|███████████████████████████████████████████████████████▏             | 40/50 [2:47:24<42:01, 252.14s/it]Epoch 40/49
+----------
+Epoch: 40, Batch: 100, Loss: 0.0002
+Epoch: 40, Batch: 200, Loss: 0.0002
+Epoch: 40, Batch: 300, Loss: 0.0002
+Epoch: 40, Batch: 400, Loss: 0.0002
+Epoch: 40, Batch: 500, Loss: 0.0002
+Epoch: 40, Batch: 600, Loss: 0.0002
+Epoch: 40, Batch: 700, Loss: 0.0002
+Epoch: 40, Batch: 800, Loss: 0.0006
+Epoch: 40, Batch: 900, Loss: 0.0003
+Validating ....
+Accuracy: 79/89 = 0.88764
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.8876_epoch-40
+Best accuracy : 0.8876404494382022
+Epochs:  82%|████████████████████████████████████████████████████████▌            | 41/50 [2:51:36<37:49, 252.12s/it]Epoch 41/49
+----------
+Epoch: 41, Batch: 100, Loss: 0.0005
+Epoch: 41, Batch: 200, Loss: 0.0001
+Epoch: 41, Batch: 300, Loss: 0.0003
+Epoch: 41, Batch: 400, Loss: 0.0002
+Epoch: 41, Batch: 500, Loss: 0.0002
+Epoch: 41, Batch: 600, Loss: 0.0004
+Epoch: 41, Batch: 700, Loss: 0.0002
+Epoch: 41, Batch: 800, Loss: 0.0003
+Epoch: 41, Batch: 900, Loss: 0.0004
+Validating ....
+Accuracy: 79/89 = 0.88764
+Epochs:  84%|█████████████████████████████████████████████████████████▉           | 42/50 [2:55:49<33:38, 252.32s/it]Epoch 42/49
+----------
+Epoch: 42, Batch: 100, Loss: 0.0006
+Epoch: 42, Batch: 200, Loss: 0.0003
+Epoch: 42, Batch: 300, Loss: 0.0003
+Epoch: 42, Batch: 400, Loss: 0.0002
+Epoch: 42, Batch: 500, Loss: 0.0004
+Epoch: 42, Batch: 600, Loss: 0.0003
+Epoch: 42, Batch: 700, Loss: 0.0002
+Epoch: 42, Batch: 800, Loss: 0.0003
+Epoch: 42, Batch: 900, Loss: 0.0003
+Validating ....
+Accuracy: 81/89 = 0.91011
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.9101_epoch-42
+Best accuracy : 0.9101123595505618
+Epochs:  86%|███████████████████████████████████████████████████████████▎         | 43/50 [3:00:03<29:28, 252.71s/it]Epoch 43/49
+----------
+Epoch: 43, Batch: 100, Loss: 0.0002
+Epoch: 43, Batch: 200, Loss: 0.0002
+Epoch: 43, Batch: 300, Loss: 0.0002
+Epoch: 43, Batch: 400, Loss: 0.0002
+Epoch: 43, Batch: 500, Loss: 0.0002
+Epoch: 43, Batch: 600, Loss: 0.0004
+Epoch: 43, Batch: 700, Loss: 0.0002
+Epoch: 43, Batch: 800, Loss: 0.0005
+Epoch: 43, Batch: 900, Loss: 0.0001
+Validating ....
+Accuracy: 82/89 = 0.92135
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.9213_epoch-43
+Best accuracy : 0.9213483146067416
+Epochs:  88%|████████████████████████████████████████████████████████████▋        | 44/50 [3:04:15<25:14, 252.45s/it]Epoch 44/49
+----------
+Epoch: 44, Batch: 100, Loss: 0.0008
+Epoch: 44, Batch: 200, Loss: 0.0002
+Epoch: 44, Batch: 300, Loss: 0.0002
+Epoch: 44, Batch: 400, Loss: 0.0004
+Epoch: 44, Batch: 500, Loss: 0.0001
+Epoch: 44, Batch: 600, Loss: 0.0003
+Epoch: 44, Batch: 700, Loss: 0.0004
+Epoch: 44, Batch: 800, Loss: 0.0002
+Epoch: 44, Batch: 900, Loss: 0.0002
+Validating ....
+Accuracy: 82/89 = 0.92135
+Epochs:  90%|██████████████████████████████████████████████████████████████       | 45/50 [3:08:27<21:01, 252.33s/it]Epoch 45/49
+----------
+Epoch: 45, Batch: 100, Loss: 0.0003
+Epoch: 45, Batch: 200, Loss: 0.0004
+Epoch: 45, Batch: 300, Loss: 0.0004
+Epoch: 45, Batch: 400, Loss: 0.0004
+Epoch: 45, Batch: 500, Loss: 0.0001
+Epoch: 45, Batch: 600, Loss: 0.0003
+Epoch: 45, Batch: 700, Loss: 0.0002
+Epoch: 45, Batch: 800, Loss: 0.0004
+Epoch: 45, Batch: 900, Loss: 0.0002
+Validating ....
+Accuracy: 78/89 = 0.87640
+Epochs:  92%|███████████████████████████████████████████████████████████████▍     | 46/50 [3:12:45<16:56, 254.24s/it]Epoch 46/49
+----------
+Epoch: 46, Batch: 100, Loss: 0.0003
+Epoch: 46, Batch: 200, Loss: 0.0003
+Epoch: 46, Batch: 300, Loss: 0.0002
+Epoch: 46, Batch: 400, Loss: 0.0004
+Epoch: 46, Batch: 500, Loss: 0.0002
+Epoch: 46, Batch: 600, Loss: 0.0002
+Epoch: 46, Batch: 700, Loss: 0.0002
+Epoch: 46, Batch: 800, Loss: 0.0002
+Epoch: 46, Batch: 900, Loss: 0.0004
+Validating ....
+Accuracy: 82/89 = 0.92135
+Epochs:  94%|████████████████████████████████████████████████████████████████▊    | 47/50 [3:16:58<12:41, 253.81s/it]Epoch 47/49
+----------
+Epoch: 47, Batch: 100, Loss: 0.0003
+Epoch: 47, Batch: 200, Loss: 0.0003
+Epoch: 47, Batch: 300, Loss: 0.0002
+Epoch: 47, Batch: 400, Loss: 0.0001
+Epoch: 47, Batch: 500, Loss: 0.0003
+Epoch: 47, Batch: 600, Loss: 0.0003
+Epoch: 47, Batch: 700, Loss: 0.0004
+Epoch: 47, Batch: 800, Loss: 0.0001
+Epoch: 47, Batch: 900, Loss: 0.0001
+Validating ....
+Accuracy: 79/89 = 0.88764
+Epochs:  96%|██████████████████████████████████████████████████████████████████▏  | 48/50 [3:21:12<08:27, 253.68s/it]Epoch 48/49
+----------
+Epoch: 48, Batch: 100, Loss: 0.0002
+Epoch: 48, Batch: 200, Loss: 0.0002
+Epoch: 48, Batch: 300, Loss: 0.0004
+Epoch: 48, Batch: 400, Loss: 0.0003
+Epoch: 48, Batch: 500, Loss: 0.0003
+Epoch: 48, Batch: 600, Loss: 0.0002
+Epoch: 48, Batch: 700, Loss: 0.0003
+Epoch: 48, Batch: 800, Loss: 0.0002
+Epoch: 48, Batch: 900, Loss: 0.0003
+Validating ....
+Accuracy: 85/89 = 0.95506
+File writted @ /home/krish/Documents/university_files/Thesis/Grasp_synthesis/CNN/generated_model/cornell/res_net/n_model_res_net_acc-0.9551_epoch-48
+Best accuracy : 0.9550561797752809
+Epochs:  98%|███████████████████████████████████████████████████████████████████▌ | 49/50 [3:25:24<04:13, 253.23s/it]Epoch 49/49
+----------
+Epoch: 49, Batch: 100, Loss: 0.0003
+Epoch: 49, Batch: 200, Loss: 0.0003
+Epoch: 49, Batch: 300, Loss: 0.0004
+Epoch: 49, Batch: 400, Loss: 0.0002
+Epoch: 49, Batch: 500, Loss: 0.0003
+Epoch: 49, Batch: 600, Loss: 0.0004
+Epoch: 49, Batch: 700, Loss: 0.0004
+Epoch: 49, Batch: 800, Loss: 0.0003
+Epoch: 49, Batch: 900, Loss: 0.0004
+Validating ....
+Accuracy: 82/89 = 0.92135
+Epochs: 100%|█████████████████████████████████████████████████████████████████████| 50/50 [3:29:37<00:00, 251.54s/it]

@@ -1,5 +1,9 @@
 ## Lifelong Object Recognition and Grasp Synthesis using Dual Memory Recurrent Self-Organization Networks
 
+<p align="center">
+  <img src="images/overview.png" width="700" title="">
+</p>
+
 This repository contains the implementation of synthetic sequential point cloud dataset generation and the implementation of hybrid learning architecture, comparises of generative autoencoder and the growing dual memory networks (GDM) for contiual learning of object recognition and grasping synthesis towards lifelong learning fashion.
 
  * ``` dataset_generation ``` folder contains the implementation of sequential point cloud dataset generation in _ROS melodic_. 

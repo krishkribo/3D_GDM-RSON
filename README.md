@@ -63,7 +63,7 @@ Our simulation robot experiment results, (left) pick and place (pack) mustard bo
 ## Paper
 Latest version available on [Neural Networks](https://doi.org/10.1016/j.neunet.2022.02.027)  (March 2022)
 
-![alt text](paper.png)
+![alt text](images/paper.png)
 
 Please adequately refer to the papers any time this code is being used. If you do publish a paper where this work helped your research, we encourage you to cite the following paper in your publications:
 

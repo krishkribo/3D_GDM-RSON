@@ -82,5 +82,5 @@ author = {Krishnakumar Santhakumar and Hamidreza Kasaei},
 ```
 
 ## Authors: 
-KrishnakumarSanthakumar and [Hamidreza Kasaei](https://www.ai.rug.nl/irl-lab/)  
+Krishnakumar Santhakumar and [Hamidreza Kasaei](https://www.ai.rug.nl/irl-lab/)  
 Work done while at [RUG](https://www.rug.nl/).

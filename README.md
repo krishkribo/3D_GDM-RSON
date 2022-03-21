@@ -45,14 +45,14 @@ Run ```python gdm_learning.py --help``` to see full list of options.
 Note: The above-mentioned experiments need to run inside their respective folders. 
 
 
-### Robot Experiment:
+## Robot Experiment:
 In the robot simulation demo, the real-time continous object recognition and grasp synthesis can be tested using ```dual-pipeline``` script. Using the script the model can be trained to learn new objects instance and category in contiual lifelong learning manner. Run ```dual-pipeline.py --help``` to see the list of options.
 
 Example (for pack scenario):
 ```
 python dual_pipeline.py --e_network_path <path to episodic memory network> --s_network_path <path to semantic memory network> --model_path <path to trained autoencoder model> --scenario pack
 ```
-#### Simulation Demo:
+## Simulation Demo:
 <p align="center"/>
   <img src="images/demo_mustard_bottle.gif" alt="animated"/>
   
@@ -60,4 +60,27 @@ python dual_pipeline.py --e_network_path <path to episodic memory network> --s_n
 
 Our simulation robot experiment results, (left) pick and place (pack) mustard bottle to basekt 2 and (right) pack power drill object to basket 1.
 
-_Thesis work, University of Groningen_
+## Paper
+Latest version available on [Neural Networks](https://doi.org/10.1016/j.neunet.2022.02.027)  (March 2022)
+
+![alt text](paper.png)
+
+Please adequately refer to the papers any time this code is being used. If you do publish a paper where this work helped your research, we encourage you to cite the following paper in your publications:
+
+```text
+@article{SANTHAKUMAR2022167,
+title = {Lifelong 3D object recognition and grasp synthesis using dual memory recurrent self-organization networks},
+journal = {Neural Networks},
+volume = {150},
+pages = {167-180},
+year = {2022},
+issn = {0893-6080},
+doi = {https://doi.org/10.1016/j.neunet.2022.02.027},
+url = {https://www.sciencedirect.com/science/article/pii/S0893608022000685},
+author = {Krishnakumar Santhakumar and Hamidreza Kasaei},
+}
+```
+
+## Authors: 
+KrishnakumarSanthakumar and [Hamidreza Kasaei](https://www.ai.rug.nl/irl-lab/)  
+Work done while at [RUG](https://www.rug.nl/).
